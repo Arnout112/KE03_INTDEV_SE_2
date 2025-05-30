@@ -45,7 +45,6 @@ namespace DataAccessLayer
                     Name = "Nebuchadnezzar",
                     Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen",
                     Price = 10000.00m,
-                    SalePrice = 9500.00m, //not currently on sale
                     StockQuantity = 2,
                     ImageUrl = "img/Nebuchadnezzar.webp",
                     CreatedAt = DateTime.UtcNow
