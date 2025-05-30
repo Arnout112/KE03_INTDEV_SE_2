@@ -40,9 +40,40 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m },
-                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m },
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m }
+                new Product
+                {
+                    Name = "Nebuchadnezzar",
+                    Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen",
+                    Price = 10000.00m,
+                    SalePrice = 9500.00m, //not currently on sale
+                    StockQuantity = 2,
+                    ImageUrl = "img/Nebuchadnezzar.webp",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Product
+                {
+                    Name = "Jack-in Chair",
+                    Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort",
+                    Price = 500.50m,
+                    SalePrice = 450.00m,
+                    SaleStartDate = DateTime.UtcNow.AddDays(-5),
+                    SaleEndDate = DateTime.UtcNow.AddDays(30),
+                    StockQuantity = 10,
+                    ImageUrl = "img/jackinchair.png",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Product
+                {
+                    Name = "EMP (Electro-Magnetic Pulse) Device",
+                    Description = "Wapentuig op de schepen van Zion",
+                    Price = 129.99m,
+                    SalePrice = 99.99m,
+                    SaleStartDate = DateTime.UtcNow,
+                    SaleEndDate = DateTime.UtcNow.AddDays(30), //on sale
+                    StockQuantity = 5,
+                    ImageUrl = "img/emp.png",
+                    CreatedAt = DateTime.UtcNow
+                }
             };
             context.Products.AddRange(products);
 
