@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,11 @@ namespace DataAccessLayer.Models
 
         public DateTime? DeliveredAt { get; set; }
 
-        public DateTime? PayedAt { get; set; }
+        public DateTime? PaidAt { get; set; }
 
         public ICollection<Product> Products { get; } = new List<Product>();
+
+        [NotMapped]
+        public List<int> ProductIds { get; set; } = new();
     }
 }
