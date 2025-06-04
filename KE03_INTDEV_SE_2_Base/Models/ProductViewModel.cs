@@ -10,7 +10,7 @@ namespace KE03_INTDEV_SE_2_Base.Models
         public SelectList? Parts { get; set; }
         public string? ProductPart { get; set; }
         public string? SearchString { get; set; }
-        public bool isOnSale { get; set; }
+        public bool IsOnSale { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
 

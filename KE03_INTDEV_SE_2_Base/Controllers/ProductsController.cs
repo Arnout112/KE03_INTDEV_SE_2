@@ -18,14 +18,13 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(bool isOnSale, string productPart, string searchString, decimal? minPrice, decimal? maxPrice, DateTime? startDate, DateTime? endDate)
+        public async Task<IActionResult> Index(ProductViewModel filter)
         {
             if (_context.Products == null)
             {
-                return Problem("Entity set 'MatrixIncDbContext.Products'  is null.");
+                return Problem("Entity set 'MatrixIncDbContext.Products' is null.");
             }
 
-            // Use LINQ to get list of genres.
             IQueryable<string> partsQuery = from p in _context.Parts
                                             orderby p.Name
                                             select p.Name;
@@ -33,58 +32,55 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             var products = from m in _context.Products
                            select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(filter.SearchString))
             {
-                // select products with matching name or description
                 products = products.Where(s =>
-                    (s.Name != null && s.Name.ToUpper().Contains(searchString.ToUpper())) ||
-                    (s.Description != null && s.Description.ToUpper().Contains(searchString.ToUpper()))
+                    (s.Name != null && s.Name.ToUpper().Contains(filter.SearchString.ToUpper())) ||
+                    (s.Description != null && s.Description.ToUpper().Contains(filter.SearchString.ToUpper()))
                 );
             }
 
-            if (!String.IsNullOrEmpty(productPart))
+            if (!string.IsNullOrEmpty(filter.ProductPart))
             {
-                // select products that contain the specified part
-                products = products.Where(x => x.Parts.Any(p => p.Name == productPart));
+                products = products.Where(x => x.Parts.Any(p => p.Name == filter.ProductPart));
             }
 
-            if (isOnSale)
+            if (filter.IsOnSale)
             {
-                // select products that are currently on sale
                 products = products.Where(p => p.SalePrice.HasValue && p.SaleStartDate <= DateTime.UtcNow && p.SaleEndDate >= DateTime.UtcNow);
             }
 
-            if (minPrice.HasValue)
+            if (filter.MinPrice.HasValue)
             {
-                products = products.Where(p => p.Price >= minPrice.Value);
+                products = products.Where(p => p.Price >= filter.MinPrice.Value);
             }
 
-            if (maxPrice.HasValue)
+            if (filter.MaxPrice.HasValue)
             {
-                products = products.Where(p => p.Price <= maxPrice.Value);
+                products = products.Where(p => p.Price <= filter.MaxPrice.Value);
             }
 
-            if (startDate.HasValue)
+            if (filter.StartDate.HasValue)
             {
-                products = products.Where(p => p.CreatedAt >= startDate.Value);
+                products = products.Where(p => p.CreatedAt >= filter.StartDate.Value);
             }
 
-            if (endDate.HasValue)
+            if (filter.EndDate.HasValue)
             {
-                products = products.Where(p => p.CreatedAt <= endDate.Value);
+                products = products.Where(p => p.CreatedAt <= filter.EndDate.Value);
             }
-
 
             var productViewModel = new ProductViewModel
             {
                 Products = await products.ToListAsync(),
                 Parts = new SelectList(await partsQuery.Distinct().ToListAsync()),
-                MinPrice = minPrice,
-                MaxPrice = maxPrice,
-                ProductPart = productPart,
-                SearchString = searchString,
-                EndDate = endDate,
-                StartDate = startDate,
+                MinPrice = filter.MinPrice,
+                MaxPrice = filter.MaxPrice,
+                ProductPart = filter.ProductPart,
+                SearchString = filter.SearchString,
+                EndDate = filter.EndDate,
+                StartDate = filter.StartDate,
+                IsOnSale = filter.IsOnSale
             };
 
             return View(productViewModel);
