@@ -40,47 +40,47 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                        new Product
-                        {
-                            Name = "Nebuchadnezzar",
-                            Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen",
-                            Price = 10000.00m,
-                            StockQuantity = 2,
-                            ImageUrl = "img/Nebuchadnezzar.webp",
-                        },
-                        new Product
-                        {
-                            Name = "Jack-in Chair",
-                            Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort",
-                            Price = 500.50m,
-                            SalePrice = 450.00m,
-                            SaleStartDate = DateTime.UtcNow.AddDays(-5),
-                            SaleEndDate = DateTime.UtcNow.AddDays(30),
-                            StockQuantity = 10,
-                            ImageUrl = "img/jackinchair.png",
-                            CreatedAt = DateTime.Parse("1999-03-31")
-                        },
-                        new Product
-                        {
-                            Name = "EMP (Electro-Magnetic Pulse) Device",
-                            Description = "Wapentuig op de schepen van Zion",
-                            Price = 129.99m,
-                            SalePrice = 99.99m,
-                            SaleStartDate = DateTime.UtcNow,
-                            SaleEndDate = DateTime.UtcNow.AddDays(30), //on sale  
-                            StockQuantity = 5,
-                            ImageUrl = "img/emp.png",
-                            CreatedAt = DateTime.UtcNow.AddDays(-20)
-                        }
+                new Product
+                {
+                    Name = "Nebuchadnezzar",
+                    Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen",
+                    Price = 10000.00m,
+                    StockQuantity = 2,
+                    ImageUrl = "img/Nebuchadnezzar.webp",
+                },
+                new Product
+                {
+                    Name = "Jack-in Chair",
+                    Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort",
+                    Price = 500.50m,
+                    SalePrice = 450.00m,
+                    SaleStartDate = DateTime.UtcNow.AddDays(-5),
+                    SaleEndDate = DateTime.UtcNow.AddDays(30),
+                    StockQuantity = 10,
+                    ImageUrl = "img/jackinchair.png",
+                    CreatedAt = DateTime.Parse("1999-03-31")
+                },
+                new Product
+                {
+                    Name = "EMP (Electro-Magnetic Pulse) Device",
+                    Description = "Wapentuig op de schepen van Zion",
+                    Price = 129.99m,
+                    SalePrice = 99.99m,
+                    SaleStartDate = DateTime.UtcNow,
+                    SaleEndDate = DateTime.UtcNow.AddDays(30), //on sale  
+                    StockQuantity = 5,
+                    ImageUrl = "img/emp.png",
+                    CreatedAt = DateTime.UtcNow.AddDays(-20)
+                }
             };
             context.Products.AddRange(products);
 
             var parts = new Part[]
             {
-                        new Part { Name = "Tandwiel", Description = "Overdracht van rotatie in bijvoorbeeld de motor of luikmechanismen"},
-                        new Part { Name = "M5 Boutje", Description = "Bevestiging van panelen, buizen of interne modules"},
-                        new Part { Name = "Hydraulische cilinder", Description = "Openen/sluiten van zware luchtsluizen of bewegende onderdelen"},
-                        new Part { Name = "Koelvloeistofpomp", Description = "Koeling van de motor of elektronische systemen."}
+                new Part { Name = "Tandwiel", Description = "Overdracht van rotatie in bijvoorbeeld de motor of luikmechanismen"},
+                new Part { Name = "M5 Boutje", Description = "Bevestiging van panelen, buizen of interne modules"},
+                new Part { Name = "Hydraulische cilinder", Description = "Openen/sluiten van zware luchtsluizen of bewegende onderdelen"},
+                new Part { Name = "Koelvloeistofpomp", Description = "Koeling van de motor of elektronische systemen."}
             };
             context.Parts.AddRange(parts);
 
