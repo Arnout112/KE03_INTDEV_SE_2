@@ -25,7 +25,6 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 return Problem("Entity set 'MatrixIncDbContext.Products'  is null.");
             }
 
-            // Use LINQ to get list of genres.
             IQueryable<string> partsQuery = from p in _context.Parts
                                             orderby p.Name
                                             select p.Name;
