@@ -23,19 +23,46 @@ namespace DataAccessLayer
             // - Denk aan namen van vliegtuigen            
             var customers = new Customer[]
             {
-                new Customer { Name = "Neo", Address = "123 Elm St" , Active=true},
-                new Customer { Name = "Morpheus", Address = "456 Oak St", Active = true },
-                new Customer { Name = "Trinity", Address = "789 Pine St", Active = true }
+                new Customer { Name = "Neo", Address = "123 Elm St", Active = true, JoinDate = DateTime.Parse("2020-01-01") },
+                new Customer { Name = "Morpheus", Address = "456 Oak St", Active = true, JoinDate = DateTime.Parse("2020-02-15") },
+                new Customer { Name = "Trinity", Address = "789 Pine St", Active = true, JoinDate = DateTime.Parse("2020-03-10") }
             };
             context.Customers.AddRange(customers);
 
             var orders = new Order[]
             {
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01")},
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01")},
-                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01")},
-                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01")}
-            };  
+                new Order
+                {
+                    Customer = customers[0],
+                    OrderDate = DateTime.Parse("2021-01-01"),
+                    Status = OrderStatus.Pending
+                    // Nog niet betaald, verzonden of geleverd
+                },
+                new Order
+                {
+                    Customer = customers[0],
+                    OrderDate = DateTime.Parse("2021-02-01"),
+                    Status = OrderStatus.Processing,
+                    PayedAt = DateTime.Parse("2021-02-02") // Betaald, maar nog niet verzonden
+                },
+                new Order
+                {
+                    Customer = customers[1],
+                    OrderDate = DateTime.Parse("2021-02-01"),
+                    Status = OrderStatus.Shipped,
+                    PayedAt = DateTime.Parse("2021-02-02"),
+                    ShippedAt = DateTime.Parse("2021-02-03")
+                },
+                new Order
+                {
+                    Customer = customers[2],
+                    OrderDate = DateTime.Parse("2021-03-01"),
+                    Status = OrderStatus.Delivered,
+                    PayedAt = DateTime.Parse("2021-03-02"),
+                    ShippedAt = DateTime.Parse("2021-03-03"),
+                    DeliveredAt = DateTime.Parse("2021-03-05")
+                }
+            };
             context.Orders.AddRange(orders);
 
             var products = new Product[]

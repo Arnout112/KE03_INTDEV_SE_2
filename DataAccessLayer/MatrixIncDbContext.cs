@@ -34,6 +34,10 @@ namespace DataAccessLayer
                 .HasMany(p => p.Products)
                 .WithMany(p => p.Parts);
 
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Status)
+                .HasConversion<String>();
+
             base.OnModelCreating(modelBuilder);
         }
     }

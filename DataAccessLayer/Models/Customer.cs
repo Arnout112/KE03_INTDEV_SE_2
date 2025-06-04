@@ -19,6 +19,9 @@ namespace DataAccessLayer.Models
         [Required]
         public string Address { get; set; }
 
+        [Required]
+        public DateTime JoinDate { get; set; } = DateTime.Today;
+
         public bool Active { get; set; }
 
         public ICollection<Order> Orders { get; } = new List<Order>();
