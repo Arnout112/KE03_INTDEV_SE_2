@@ -43,14 +43,14 @@ namespace DataAccessLayer
                     Customer = customers[0],
                     OrderDate = DateTime.Parse("2021-02-01"),
                     Status = OrderStatus.Processing,
-                    PayedAt = DateTime.Parse("2021-02-02") // Betaald, maar nog niet verzonden
+                    PaidAt = DateTime.Parse("2021-02-02") // Betaald, maar nog niet verzonden
                 },
                 new Order
                 {
                     Customer = customers[1],
                     OrderDate = DateTime.Parse("2021-02-01"),
                     Status = OrderStatus.Shipped,
-                    PayedAt = DateTime.Parse("2021-02-02"),
+                    PaidAt = DateTime.Parse("2021-02-02"),
                     ShippedAt = DateTime.Parse("2021-02-03")
                 },
                 new Order
@@ -58,7 +58,7 @@ namespace DataAccessLayer
                     Customer = customers[2],
                     OrderDate = DateTime.Parse("2021-03-01"),
                     Status = OrderStatus.Delivered,
-                    PayedAt = DateTime.Parse("2021-03-02"),
+                    PaidAt = DateTime.Parse("2021-03-02"),
                     ShippedAt = DateTime.Parse("2021-03-03"),
                     DeliveredAt = DateTime.Parse("2021-03-05")
                 }

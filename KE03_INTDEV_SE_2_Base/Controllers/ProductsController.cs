@@ -14,6 +14,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         {
             _context = context;
         }
+
         // GET: Products
         public async Task<IActionResult> Index()
         {

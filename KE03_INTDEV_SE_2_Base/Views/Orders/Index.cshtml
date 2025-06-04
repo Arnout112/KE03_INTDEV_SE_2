@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DataAccessLayer.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Orders</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Order</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Customer</th>
+            <th>Shipped</th>
+            <th>Delivered</th>
+            <th>Paid</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.OrderDate.ToString("dd-MM-yyyy")</td>
+                <td>@order.Status</td>
+                <td>@order.Customer.Name</td>
+                <td>@order.ShippedAt?.ToString("dd-MM-yyyy")</td>
+                <td>@order.DeliveredAt?.ToString("dd-MM-yyyy")</td>
+                <td>@order.PaidAt?.ToString("dd-MM-yyyy")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@order.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@order.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@order.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
