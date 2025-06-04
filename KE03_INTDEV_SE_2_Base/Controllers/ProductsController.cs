@@ -14,10 +14,30 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         {
             _context = context;
         }
+
+        //// GET: Products
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.Products.ToListAsync());
+        //}
+
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Products.ToListAsync());
+            if (_context.Products == null)
+            {
+                return Problem("Entity set 'MatrixIncDbContext.Products'  is null.");
+            }
+
+            var products = from m in _context.Products
+                           select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name!.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
