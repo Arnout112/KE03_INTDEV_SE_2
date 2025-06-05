@@ -3,6 +3,7 @@ using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
@@ -54,7 +55,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId,Status")] Order order, int[] selectedProductIds)
         {
-            Console.WriteLine($"ModelState valid: {ModelState.IsValid}");
+            Debug.WriteLine($"ModelState valid: {ModelState.IsValid}");
 
             if (!ModelState.IsValid)
             {
@@ -62,7 +63,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 {
                     foreach (var error in entry.Value.Errors)
                     {
-                        Console.WriteLine($"❌ {entry.Key}: {error.ErrorMessage}");
+                        Debug.WriteLine($"❌ {entry.Key}: {error.ErrorMessage}");
                     }
                 }
             }
@@ -75,7 +76,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                Console.WriteLine("✅ Order opgeslagen!");
+                Debug.WriteLine("✅ Order opgeslagen!");
                 return RedirectToAction(nameof(Index));
             }
 
