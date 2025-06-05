@@ -4,40 +4,55 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Customer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="form">
+    <p class="headerform">Maak een klant aan</p>
+    <p class="naam">Vul voor -en achternaam in:</p>
+    <p class="straatnaam">Vul straatnaam in:</p>
+    <p class="plaats">Vul plaatsnaam in:</p>
+    <p class="land">Vul land in:</p>
+    <p class="postcode">Vul postcode in:</p>
+    <p class="huisnummer">Vul huisnummer in:</p>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="input-row">
+            <div class="input-col">
+                <div class="input-container">
+                    <input asp-for="Name" class="input" placeholder="Bas van Dijk" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <input asp-for="Address" class="input" placeholder="Kasteellaan" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <input asp-for="Address" class="input" placeholder="Amsterdam" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+            <div class="input-col right">
+                <div class="input-container">
+                    <input asp-for="Address" class="input" placeholder="Nederland" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <input asp-for="Address" class="input" placeholder="3948TT" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <input asp-for="Address" class="input" placeholder="19/19A" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+        <div class="form-group button-row" style="margin-top: 10px; margin-left: 260px;">
+            <a class="annuleer" asp-action="Index">Annuleer</a>
+            <input type="submit" value="Toevoegen" class="aanmaken" />
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
