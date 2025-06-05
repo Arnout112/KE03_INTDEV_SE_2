@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,7 @@ namespace DataAccessLayer.Models
 
         public int CustomerId { get; set; }
 
+        [ValidateNever]
         public Customer Customer { get; set; } = null!;
 
         public DateTime? PaidAt { get; set; }
