@@ -12,7 +12,7 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>Adres</th>
             <th>@Html.DisplayNameFor(model => model.Active)</th>
             <th>@Html.DisplayNameFor(model => model.JoinDate)</th>
             <th></th>
@@ -23,12 +23,14 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>
+                    @($"{item.StreetName} {item.HouseNumber}, {item.PostalCode} {item.CityName}, {item.Country}")
+                </td>
                 <td>@Html.DisplayFor(modelItem => item.Active)</td>
                 <td>@item.JoinDate.ToShortDateString()</td>
                 <td>
                     <a class="bewerk" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
                         <button type="submit" class="verwijder">Verwijder</button>
                     </form>
                 </td>

@@ -22,7 +22,6 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 .Include(o => o.Customer)
                 .Include(o => o.Products)
                 .ToListAsync();
-
             return View(orders);
         }
 
@@ -34,7 +33,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             var order = await _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.Products)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null) return NotFound();
 
@@ -45,32 +44,47 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Name");
-            ViewBag.AllProducts = _context.Products.ToList(); // lijst voor checkboxes
+            ViewData["Products"] = new MultiSelectList(_context.Products, "Id", "Name");
+            ViewData["Status"] = new SelectList(Enum.GetValues(typeof(OrderStatus)));
             return View();
         }
 
         // POST: Orders/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Order order, [FromForm] List<int> selectedProducts)
+        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId,Status")] Order order, int[] selectedProductIds)
         {
+            Console.WriteLine($"ModelState valid: {ModelState.IsValid}");
+
+            if (!ModelState.IsValid)
+            {
+                foreach (var entry in ModelState)
+                {
+                    foreach (var error in entry.Value.Errors)
+                    {
+                        Console.WriteLine($"❌ {entry.Key}: {error.ErrorMessage}");
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                var products = await _context.Products.Where(p => selectedProducts.Contains(p.Id)).ToListAsync();
-                foreach (var product in products)
-                {
-                    order.Products.Add(product);
-                }
+                order.Products = await _context.Products
+                    .Where(p => selectedProductIds.Contains(p.Id))
+                    .ToListAsync();
 
-                _context.Orders.Add(order);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
+                Console.WriteLine("✅ Order opgeslagen!");
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Name", order.CustomerId);
-            ViewBag.AllProducts = _context.Products.ToList();
+            ViewData["Products"] = new MultiSelectList(_context.Products, "Id", "Name", selectedProductIds);
+            ViewData["Status"] = new SelectList(Enum.GetValues(typeof(OrderStatus)), order.Status);
             return View(order);
         }
+
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -80,55 +94,51 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             var order = await _context.Orders
                 .Include(o => o.Products)
                 .FirstOrDefaultAsync(o => o.Id == id);
+
             if (order == null) return NotFound();
 
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Name", order.CustomerId);
             ViewData["Products"] = new MultiSelectList(_context.Products, "Id", "Name", order.Products.Select(p => p.Id));
+            ViewData["Status"] = new SelectList(Enum.GetValues(typeof(OrderStatus)), order.Status);
             return View(order);
         }
 
         // POST: Orders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Order order, int[] selectedProducts)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId,Status")] Order order, int[] selectedProductIds)
         {
             if (id != order.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
-                try
+                var existingOrder = await _context.Orders
+                    .Include(o => o.Products)
+                    .FirstOrDefaultAsync(o => o.Id == id);
+
+                if (existingOrder == null) return NotFound();
+
+                existingOrder.OrderDate = order.OrderDate;
+                existingOrder.CustomerId = order.CustomerId;
+                existingOrder.Status = order.Status;
+
+                existingOrder.Products.Clear();
+                var newProducts = await _context.Products
+                    .Where(p => selectedProductIds.Contains(p.Id))
+                    .ToListAsync();
+
+                foreach (var product in newProducts)
                 {
-                    _context.Update(order);
-
-                    var existingOrder = await _context.Orders
-                        .Include(o => o.Products)
-                        .FirstOrDefaultAsync(o => o.Id == id);
-
-                    if (existingOrder != null)
-                    {
-                        existingOrder.Products.Clear();
-                        var selected = await _context.Products.Where(p => selectedProducts.Contains(p.Id)).ToListAsync();
-                        foreach (var product in selected)
-                        {
-                            existingOrder.Products.Add(product);
-                        }
-
-                        await _context.SaveChangesAsync();
-                    }
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_context.Orders.Any(e => e.Id == order.Id))
-                        return NotFound();
-                    else
-                        throw;
+                    existingOrder.Products.Add(product);
                 }
 
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Name", order.CustomerId);
-            ViewData["Products"] = new MultiSelectList(_context.Products, "Id", "Name", selectedProducts);
+            ViewData["Products"] = new MultiSelectList(_context.Products, "Id", "Name", selectedProductIds);
+            ViewData["Status"] = new SelectList(Enum.GetValues(typeof(OrderStatus)), order.Status);
             return View(order);
         }
 
@@ -139,7 +149,8 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(o => o.Id == id);
+
             if (order == null) return NotFound();
 
             return View(order);
