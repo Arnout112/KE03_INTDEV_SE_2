@@ -143,6 +143,24 @@ body {
     text-decoration: none;
 }
 
+.navbtn7 {
+    width: 150px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #FFF;
+    color: #000;
+    text-align: center;
+    font-family: "League Gothic";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
     .navbtn1:hover,
     .navbtn2:hover,
     .navbtn3:hover,
@@ -150,7 +168,8 @@ body {
     .navbtn5:hover,
     .navbtn6:hover,
     .voegtoe:hover,
-    .bewerk:hover{
+    .bewerk:hover,
+    .voegtoe2:hover{
         background-color: #FFF;
         color: #1D1D1D;
         border: 1px solid #1D1D1D;
@@ -183,7 +202,7 @@ body {
     height: 48px;
     flex-shrink: 0;
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     left: 800px;
 }
 
@@ -218,6 +237,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 40px 0 #000;
+    margin-top: 10px;
 }
 
     .table th, .table td {
@@ -315,6 +335,26 @@ body {
     left: 420px;
 }
 
+.voegtoe2 {
+    width: 200px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #FFF;
+    color: #FFF;
+    text-align: center;
+    font-family: "League Gothic";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    top: 140px;
+    left: 320px;
+}
+
 .form {
     width: 750px;
     height: 550px;
@@ -348,8 +388,8 @@ body {
     font-weight: 400;
     line-height: 130%;
     position: absolute;
-    left: 800px;
-    top: 50px;
+    left: 750px;
+    top: 70px;
 }
 
 .naam {
@@ -420,12 +460,107 @@ body {
     top: 20px;
 }
 
+.naam1 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+.land1 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+.plaats1 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+.straatnaam1 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+.postcode1 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+.huisnummer1 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: absolute;
+    bottom: 5px;
+    position: relative;
+    top: 0px;
+}
+.straatnaam2 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+land2 {
+    width: 300px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
+}
+
 .input-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-left: 50px; /* verder naar links */
     gap: 20px; /* mooie marge tussen de velden */
+}
+
+.input-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 50px; /* verder naar links */
+    gap: 1px; /* mooie marge tussen de velden */
 }
 
 
@@ -453,6 +588,23 @@ body {
     flex-direction: column;
     gap: 35px; /* gelijke verticale ruimte tussen alle velden */
 }
+
+.input, select.input {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
+    border: none;
+    padding: 0 16px;
+    font-size: 20px;
+    font-family: "League Gothic";
+    color: #1D1D1D;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
 
 .button-row {
     display: flex;
@@ -510,5 +662,119 @@ body {
     transition: background 0.2s, color 0.2s, border 0.2s;
     text-decoration: none;
 }
+
+.product-zoekform {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+.zoekform-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100vw;
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
+    justify-content: flex-start;
+}
+
+.filterkolom {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 220px;
+    align-items: flex-start;
+    margin-left: 80px;
+}
+
+.filter-item label {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 20px;
+}
+
+.filter-prijs,
+.filter-datum {
+    width: 80px;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+    padding: 4px 8px;
+    font-family: "League Gothic";
+    font-size: 18px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.onderdelen {
+    width: 150px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
+}
+
+.zoekbalk-kolom {
+    flex: 0 1 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.zoekbalk-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.zoekbalk {
+    width: 320px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #FFF;
+    padding: 0 16px;
+    font-family: "League Gothic";
+    font-size: 22px;
+    background: #FFF;
+    color: #1D1D1D;
+}
+
+.zoekknop {
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #27870D;
+    background: #27870D;
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 22px;
+    padding: 0 28px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+    .zoekknop:hover {
+        background: #FFF;
+        color: #27870D;
+        border: 1px solid #27870D;
+    }
+
+.product-zoekform {
+    position: absolute;
+    top: 30px;
+    left: 700px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
 
 

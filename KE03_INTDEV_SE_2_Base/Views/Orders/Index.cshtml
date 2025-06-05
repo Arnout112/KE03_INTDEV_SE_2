@@ -4,10 +4,8 @@
     ViewData["Title"] = "Orders";
 }
 
-<h1>Orders</h1>
-
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New Order</a>
+    <a asp-action="Create" class="voegtoe">Create New Order</a>
 </p>
 
 <table class="table">
@@ -35,11 +33,13 @@
                 <td>@order.ShippedAt?.ToString("dd-MM-yyyy")</td>
                 <td>@order.DeliveredAt?.ToString("dd-MM-yyyy")</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@order.Id">Details</a> |
-                    <a asp-action="Edit" asp-route-id="@order.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@order.Id">Delete</a>
+                    <a class="bewerk" asp-action="Edit" asp-route-id="@order.Id">Bewerk</a>
+                    <form asp-action="Delete" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <button type="submit" class="verwijder" onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?');">Verwijder</button>
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
