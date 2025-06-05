@@ -30,8 +30,8 @@ namespace DataAccessLayer.Models
         public int StockQuantity { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public ICollection<Order> Orders { get; } = new List<Order>();
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
 
-        public ICollection<Part> Parts { get; } = new List<Part>();
+        public ICollection<Part> Parts { get; set; } = new List<Part>();
     }
 }

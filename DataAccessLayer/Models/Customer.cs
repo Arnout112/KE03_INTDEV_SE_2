@@ -14,16 +14,28 @@ namespace DataAccessLayer.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        public string? StreetName { get; set; }
+
+        [Required]
+        public string? Country { get; set; }
+
+        [Required]
+        public string? PostalCode { get; set; }
+
+        [Required]
+        public string? HouseNumber { get; set; }
+
+        [Required]
+        public string? CityName { get; set; }
 
         [Required]
         public DateTime JoinDate { get; set; } = DateTime.Today;
 
         public bool Active { get; set; }
 
-        public ICollection<Order> Orders { get; } = new List<Order>();
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

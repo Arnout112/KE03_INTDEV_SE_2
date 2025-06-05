@@ -17,16 +17,43 @@ namespace DataAccessLayer
                 return;   // DB has been seeded
             }
 
-            // TODO: Hier moet ik nog wat namen verzinnen die betrekking hebben op de matrix.
-            // - Denk aan de m3 boutjes, moertjes en ringetjes.
-            // - Denk aan namen van schepen
-            // - Denk aan namen van vliegtuigen            
             var customers = new Customer[]
             {
-                new Customer { Name = "Neo", Address = "123 Elm St", Active = true, JoinDate = DateTime.Parse("2020-01-01") },
-                new Customer { Name = "Morpheus", Address = "456 Oak St", Active = true, JoinDate = DateTime.Parse("2020-02-15") },
-                new Customer { Name = "Trinity", Address = "789 Pine St", Active = true, JoinDate = DateTime.Parse("2020-03-10") }
+                new Customer
+                {
+                    Name = "Neo",
+                    StreetName = "Elm St",
+                    HouseNumber = "123",
+                    PostalCode = "10001",
+                    CityName = "Zion City",
+                    Country = "Matrixland",
+                    Active = true,
+                    JoinDate = DateTime.Parse("2020-01-01")
+                },
+                new Customer
+                {
+                    Name = "Morpheus",
+                    StreetName = "Oak St",
+                    HouseNumber = "456",
+                    PostalCode = "10002",
+                    CityName = "Zion City",
+                    Country = "Matrixland",
+                    Active = true,
+                    JoinDate = DateTime.Parse("2020-02-15")
+                },
+                new Customer
+                {
+                    Name = "Trinity",
+                    StreetName = "Pine St",
+                    HouseNumber = "789",
+                    PostalCode = "10003",
+                    CityName = "Zion City",
+                    Country = "Matrixland",
+                    Active = true,
+                    JoinDate = DateTime.Parse("2020-03-10")
+                }
             };
+
             context.Customers.AddRange(customers);
 
             var orders = new Order[]

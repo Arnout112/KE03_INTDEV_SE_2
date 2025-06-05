@@ -17,9 +17,9 @@
             <th>Order Date</th>
             <th>Status</th>
             <th>Customer</th>
+            <th>Paid</th>
             <th>Shipped</th>
             <th>Delivered</th>
-            <th>Paid</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -31,9 +31,9 @@
                 <td>@order.OrderDate.ToString("dd-MM-yyyy")</td>
                 <td>@order.Status</td>
                 <td>@order.Customer.Name</td>
+                <td>@order.PaidAt?.ToString("dd-MM-yyyy")</td>
                 <td>@order.ShippedAt?.ToString("dd-MM-yyyy")</td>
                 <td>@order.DeliveredAt?.ToString("dd-MM-yyyy")</td>
-                <td>@order.PaidAt?.ToString("dd-MM-yyyy")</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@order.Id">Details</a> |
                     <a asp-action="Edit" asp-route-id="@order.Id">Edit</a> |
