@@ -1,7 +1,90 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
-
+    var ordersPerMonth = ViewBag.OrdersPerMonth as IEnumerable<dynamic>;
+    var customersPerMonth = ViewBag.CustomersPerMonth as IEnumerable<dynamic>;
+    var totalRevenue = ViewBag.TotalRevenue;
+    var lowStockProducts = ViewBag.LowStockProducts as IEnumerable<dynamic>;
 }
+
 <div class="dashboard">
-    <p>Dashboard</p>
+    <h2>Dashboard</h2>
+
+    <div>
+        <h3>Totale omzet: @((totalRevenue is decimal d ? d.ToString("C") : "€0,00"))</h3>
+    </div>
+
+    <div style="width: 600px; margin-bottom: 40px;">
+        <canvas id="ordersChart"></canvas>
+    </div>
+    <div style="width: 600px; margin-bottom: 40px;">
+        <canvas id="customersChart"></canvas>
+    </div>
+
+    <h3>Producten met lage voorraad</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Voorraad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (lowStockProducts != null)
+            {
+                foreach (var p in lowStockProducts)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+                        <td>@p.StockQuantity</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <script>
+        // Orders per maand
+        var ordersLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<string>>(
+                    ordersPerMonth != null ? ordersPerMonth.Select(x => (string)x.Month) : Array.Empty<string>()
+            ));
+    var ordersData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<int>>(
+                ordersPerMonth != null ? ordersPerMonth.Select(x => (int)x.Count) : Array.Empty<int>()
+        ));
+
+    var ctxOrders = document.getElementById('ordersChart').getContext('2d');
+    new Chart(ctxOrders, {
+        type: 'bar',
+        data: {
+            labels: ordersLabels,
+            datasets: [{
+                label: 'Orders per maand',
+                data: ordersData,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            }]
+        }
+    });
+
+        // Klanten geregistreerd per maand
+        var customersLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<string>>(
+                customersPerMonth != null ? customersPerMonth.Select(x => (string)x.Month) : Array.Empty<string>()
+        ));
+    var customersData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<int>>(
+                customersPerMonth != null ? customersPerMonth.Select(x => (int)x.Count) : Array.Empty<int>()
+        ));
+
+    var ctxCustomers = document.getElementById('customersChart').getContext('2d');
+    new Chart(ctxCustomers, {
+        type: 'line',
+        data: {
+            labels: customersLabels,
+            datasets: [{
+                label: 'Klanten geregistreerd per maand',
+                data: customersData,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)'
+            }]
+        }
+    });
+</script>
+}
