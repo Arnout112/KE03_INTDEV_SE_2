@@ -2,13 +2,12 @@
 @model ProductViewModel  
 
 @{  
-    ViewData["Title"] = "Index";  
+    ViewData["Title"] = "Producten";  
 }  
-
-<h1>Index</h1>  
+<p class="headerform1">Maak een klant aan</p>
 
 <p>  
-    <a asp-action="Create">Create New</a>  
+    <a asp-action="Create">Maak nieuw product</a>  
 </p>  
 
 <form asp-controller="Products" asp-action="Index" method="get">  
@@ -36,7 +35,7 @@
     </div>
 </form>  
 
-<table class="table">  
+<table class="table1">  
     <thead>  
         <tr>  
             <th>  
@@ -62,9 +61,6 @@
             </th>  
             <th>  
                 @Html.DisplayNameFor(model => model.Products![0].StockQuantity)
-            </th>  
-            <th>  
-                @Html.DisplayNameFor(model => model.Products![0].CreatedAt)
             </th>  
             <th></th>  
         </tr>  
@@ -96,13 +92,11 @@
             <td>  
                 @Html.DisplayFor(modelItem => item.StockQuantity)  
             </td>  
-            <td>  
-                @Html.DisplayFor(modelItem => item.CreatedAt)  
-            </td>  
-            <td>  
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |  
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |  
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>  
+            <td>
+                    <a class="bewerk" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                        <button type="submit" class="verwijder" onclick="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">Verwijder</button>
+                    </form>
             </td>  
         </tr>  
 }  

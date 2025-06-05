@@ -1,76 +1,54 @@
 ﻿@model DataAccessLayer.Models.Customer
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Bewerk klant";
 }
 
-<h1>Edit</h1>
-
-<h4>Customer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="form">
+    <p class="headerform">Bewerk een klant</p>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="input-row">
+            <div class="input-col">
+                <div class="input-container">
+                    <label class="naam" for="Name">Vul voor- en achternaam in:</label>
+                    <input asp-for="Name" class="input" id="Name" placeholder="Bas van Dijk" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <label class="straatnaam" for="StreetName">Vul straatnaam in:</label>
+                    <input asp-for="StreetName" class="input" id="StreetName" placeholder="Kasteellaan" />
+                    <span asp-validation-for="StreetName" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <label class="plaats" for="CityName">Vul plaatsnaam in:</label>
+                    <input asp-for="CityName" class="input" id="CityName" placeholder="Amsterdam" />
+                    <span asp-validation-for="CityName" class="text-danger"></span>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="StreetName" class="control-label"></label>
-                <input asp-for="StreetName" class="form-control" />
-                <span asp-validation-for="StreetName" class="text-danger"></span>
+            <div class="input-col">
+                <div class="input-container">
+                    <label class="land" for="Country">Vul land in:</label>
+                    <input asp-for="Country" class="input" id="Country" placeholder="Nederland" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <label class="postcode" for="PostalCode">Vul postcode in:</label>
+                    <input asp-for="PostalCode" class="input" id="PostalCode" placeholder="3948TT" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+                <div class="input-container">
+                    <label class="huisnummer" for="HouseNumber">Vul huisnummer in:</label>
+                    <input asp-for="HouseNumber" class="input" id="HouseNumber" placeholder="19/19A" />
+                    <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="HouseNumber" class="control-label"></label>
-                <input asp-for="HouseNumber" class="form-control" />
-                <span asp-validation-for="HouseNumber" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PostalCode" class="control-label"></label>
-                <input asp-for="PostalCode" class="form-control" />
-                <span asp-validation-for="PostalCode" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="CityName" class="control-label"></label>
-                <input asp-for="CityName" class="form-control" />
-                <span asp-validation-for="CityName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="JoinDate" class="control-label"></label>
-                <input asp-for="JoinDate" type="date" class="form-control" />
-                <span asp-validation-for="JoinDate" class="text-danger"></span>
-            </div>
-
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Opslaan" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Terug naar lijst</a>
+        </div>
+        <div class="form-group button-row" style="margin-top: 10px; margin-left: 260px;">
+            <a class="annuleer" asp-action="Index">Annuleer</a>
+            <input type="submit" value="Bewerk" class="aanmaken" />
+        </div>
+    </form>
 </div>
 
 @section Scripts {
