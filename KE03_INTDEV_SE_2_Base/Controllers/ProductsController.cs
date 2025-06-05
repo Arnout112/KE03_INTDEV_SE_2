@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DataAccessLayer;
+﻿using DataAccessLayer;
 using DataAccessLayer.Models;
+using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
@@ -16,9 +18,72 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ProductViewModel filter)
         {
-            return View(await _context.Products.ToListAsync());
+            if (_context.Products == null)
+            {
+                return Problem("Entity set 'MatrixIncDbContext.Products' is null.");
+            }
+
+            IQueryable<string> partsQuery = from p in _context.Parts
+                                            orderby p.Name
+                                            select p.Name;
+
+            var products = from m in _context.Products
+                           select m;
+
+            if (!string.IsNullOrEmpty(filter.SearchString))
+            {
+                products = products.Where(s =>
+                    (s.Name != null && s.Name.ToUpper().Contains(filter.SearchString.ToUpper())) ||
+                    (s.Description != null && s.Description.ToUpper().Contains(filter.SearchString.ToUpper()))
+                );
+            }
+
+            if (!string.IsNullOrEmpty(filter.ProductPart))
+            {
+                products = products.Where(x => x.Parts.Any(p => p.Name == filter.ProductPart));
+            }
+
+            if (filter.IsOnSale)
+            {
+                products = products.Where(p => p.SalePrice.HasValue && p.SaleStartDate <= DateTime.UtcNow && p.SaleEndDate >= DateTime.UtcNow);
+            }
+
+            if (filter.MinPrice.HasValue)
+            {
+                products = products.Where(p => p.Price >= filter.MinPrice.Value);
+            }
+
+            if (filter.MaxPrice.HasValue)
+            {
+                products = products.Where(p => p.Price <= filter.MaxPrice.Value);
+            }
+
+            if (filter.StartDate.HasValue)
+            {
+                products = products.Where(p => p.CreatedAt >= filter.StartDate.Value);
+            }
+
+            if (filter.EndDate.HasValue)
+            {
+                products = products.Where(p => p.CreatedAt <= filter.EndDate.Value);
+            }
+
+            var productViewModel = new ProductViewModel
+            {
+                Products = await products.ToListAsync(),
+                Parts = new SelectList(await partsQuery.Distinct().ToListAsync()),
+                MinPrice = filter.MinPrice,
+                MaxPrice = filter.MaxPrice,
+                ProductPart = filter.ProductPart,
+                SearchString = filter.SearchString,
+                EndDate = filter.EndDate,
+                StartDate = filter.StartDate,
+                IsOnSale = filter.IsOnSale
+            };
+
+            return View(productViewModel);
         }
 
         // GET: Products/Details/5

@@ -1,83 +1,110 @@
-﻿@model IEnumerable<DataAccessLayer.Models.Product>
+﻿@using KE03_INTDEV_SE_2_Base.Models  
+@model ProductViewModel  
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{  
+    ViewData["Title"] = "Index";  
+}  
 
-<h1>Index</h1>
+<h1>Index</h1>  
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-				Image
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SalePrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SaleStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SaleEndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-				<img src="@item.ImageUrl" alt="Product Image" style="width: 50px; height: 50px;" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SalePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaleStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaleEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+<p>  
+    <a asp-action="Create">Create New</a>  
+</p>  
+
+<form asp-controller="Products" asp-action="Index" method="get">  
+    <div>
+        <label><input type="checkbox" asp-for="IsOnSale" value="true" /> In de aanbieding</label>
+    </div>
+    <div>
+        <label>Onderdelen: 
+            <select asp-for="ProductPart" asp-items="Model.Parts">  
+                <option value="">All</option>  
+            </select>
+        </label>
+    </div>
+    <div>
+        <label>Prijs: <input type="number" asp-for="MinPrice" placeholder="Min" /> - <input type="number" asp-for="MaxPrice" placeholder="Max" /></label>
+    </div>
+    <div>
+        <label>Datum: <input type="date" asp-for="StartDate" /> - <input type="date" asp-for="EndDate" /></label>
+    </div>
+    <div>
+        <label>Naam: <input type="text" asp-for="SearchString" /></label>
+    </div>
+    <div>
+        <input type="submit" value="Filter" />  
+    </div>
+</form>  
+
+<table class="table">  
+    <thead>  
+        <tr>  
+            <th>  
+                Image  
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].Name)  
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].Description)
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].Price)
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].SalePrice)
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].SaleStartDate)
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].SaleEndDate)
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].StockQuantity)
+            </th>  
+            <th>  
+                @Html.DisplayNameFor(model => model.Products![0].CreatedAt)
+            </th>  
+            <th></th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+@foreach (var item in Model.Products!) {  
+        <tr>  
+            <td>  
+                <img src="@item.ImageUrl" alt="Product Image" style="width: 50px; height: 50px;" />  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.Name)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.Description)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.Price)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.SalePrice)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.SaleStartDate)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.SaleEndDate)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.StockQuantity)  
+            </td>  
+            <td>  
+                @Html.DisplayFor(modelItem => item.CreatedAt)  
+            </td>  
+            <td>  
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |  
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |  
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>  
+            </td>  
+        </tr>  
+}  
+    </tbody>  
 </table>

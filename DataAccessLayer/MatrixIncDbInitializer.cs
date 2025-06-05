@@ -74,7 +74,6 @@ namespace DataAccessLayer
                     Price = 10000.00m,
                     StockQuantity = 2,
                     ImageUrl = "img/Nebuchadnezzar.webp",
-                    CreatedAt = DateTime.UtcNow
                 },
                 new Product
                 {
@@ -86,7 +85,7 @@ namespace DataAccessLayer
                     SaleEndDate = DateTime.UtcNow.AddDays(30),
                     StockQuantity = 10,
                     ImageUrl = "img/jackinchair.png",
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.Parse("1999-03-31")
                 },
                 new Product
                 {
@@ -95,10 +94,10 @@ namespace DataAccessLayer
                     Price = 129.99m,
                     SalePrice = 99.99m,
                     SaleStartDate = DateTime.UtcNow,
-                    SaleEndDate = DateTime.UtcNow.AddDays(30), //on sale
+                    SaleEndDate = DateTime.UtcNow.AddDays(30), //on sale  
                     StockQuantity = 5,
                     ImageUrl = "img/emp.png",
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow.AddDays(-20)
                 }
             };
             context.Products.AddRange(products);
@@ -111,6 +110,12 @@ namespace DataAccessLayer
                 new Part { Name = "Koelvloeistofpomp", Description = "Koeling van de motor of elektronische systemen."}
             };
             context.Parts.AddRange(parts);
+
+            products[0].Parts.Add(parts[0]);
+            products[0].Parts.Add(parts[1]);
+            products[1].Parts.Add(parts[1]);
+            products[1].Parts.Add(parts[2]);
+            products[2].Parts.Add(parts[3]);
 
             context.SaveChanges();
 
