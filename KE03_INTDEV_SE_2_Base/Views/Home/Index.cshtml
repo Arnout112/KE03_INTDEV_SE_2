@@ -1,7 +1,55 @@
-﻿@{
-    ViewData["Title"] = "Dashboard";
+﻿@using System.Text.Json
 
+@{
+    ViewData["Title"] = "Dashboard";
+    var ordersPerMonth = ViewBag.OrdersPerMonth as IEnumerable<dynamic>;
+    var customersPerMonth = ViewBag.CustomersPerMonth as IEnumerable<dynamic>;
+    var totalRevenue = ViewBag.TotalRevenue;
+    var lowStockProducts = ViewBag.LowStockProducts as IEnumerable<dynamic>;
 }
+
 <div class="dashboard">
-    <p>Dashboard</p>
+    <h2>Dashboard</h2>
+
+    <div>
+        <p>Totale omzet: @((totalRevenue is decimal d ? d.ToString("C") : "€0,00"))</p>
+    </div>
+
+    <div style="width: 600px; margin-bottom: 40px;">
+        <canvas id="ordersChart"></canvas>
+    </div>
+    <div style="width: 600px; margin-bottom: 40px;">
+        <canvas id="customersChart"></canvas>
+    </div>
+
+    <p>Producten met lage voorraad</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Voorraad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (lowStockProducts != null)
+            {
+                foreach (var p in lowStockProducts)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+                        <td>@p.StockQuantity</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <script src="~/js/dashboard.js"></script>
+    <script>
+        const ordersPerMonth = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ordersPerMonth ?? new List<dynamic>()));
+        const customersPerMonth = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(customersPerMonth ?? new List<dynamic>()));
+        renderDashboardCharts(ordersPerMonth, customersPerMonth);
+    </script>
+}
