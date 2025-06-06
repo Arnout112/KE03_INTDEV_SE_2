@@ -7,33 +7,48 @@
 <p class="headerform1">Maak een klant aan</p>
 
 <p>  
-    <a asp-action="Create">Maak nieuw product</a>  
+    <a class="voegtoe2" asp-action="Create">Maak product aan</a>
 </p>  
 
-<form asp-controller="Products" asp-action="Index" method="get">  
-    <div>
-        <label><input type="checkbox" asp-for="IsOnSale" value="true" /> In de aanbieding</label>
+<form asp-controller="Products" asp-action="Index" method="get" class="product-zoekform">
+    <div class="zoekform-container">
+        <div class="zoekbalk-kolom">
+            <div class="zoekbalk-wrapper">
+                <input type="text" asp-for="SearchString" class="zoekbalk" placeholder="Zoek op naam..." />
+                <input type="submit" value="Zoek" class="navbtn7" />
+            </div>
+        </div>
+        <div class="filterkolom">
+            <div class="filter-item">
+                <label><input type="checkbox" asp-for="IsOnSale" value="true" /> In de aanbieding</label>
+            </div>
+            <div class="filter-item">
+                    <label>
+                            Onderdelen:
+                            <select asp-for="ProductPart" asp-items="Model.Parts" class="onderdelen">
+                                <option value="">All</option>
+                            </select>
+                    </label>
+            </div>
+            <div class="filter-item">
+                <label>
+                    Prijs:
+                    <input type="number" asp-for="MinPrice" placeholder="Min" class="filter-prijs" /> -
+                    <input type="number" asp-for="MaxPrice" placeholder="Max" class="filter-prijs" />
+                </label>
+            </div>
+            <div class="filter-item">
+                <label>
+                    Datum:
+                    <input type="date" asp-for="StartDate" class="filter-datum" /> -
+                    <input type="date" asp-for="EndDate" class="filter-datum" />
+                </label>
+            </div>
+        </div>
     </div>
-    <div>
-        <label>Onderdelen: 
-            <select asp-for="ProductPart" asp-items="Model.Parts">  
-                <option value="">All</option>  
-            </select>
-        </label>
-    </div>
-    <div>
-        <label>Prijs: <input type="number" asp-for="MinPrice" placeholder="Min" /> - <input type="number" asp-for="MaxPrice" placeholder="Max" /></label>
-    </div>
-    <div>
-        <label>Datum: <input type="date" asp-for="StartDate" /> - <input type="date" asp-for="EndDate" /></label>
-    </div>
-    <div>
-        <label>Naam: <input type="text" asp-for="SearchString" /></label>
-    </div>
-    <div>
-        <input type="submit" value="Filter" />  
-    </div>
-</form>  
+</form>
+
+
 
 <table class="table1">  
     <thead>  
