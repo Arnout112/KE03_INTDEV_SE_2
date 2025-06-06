@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Text.Json
+
+@{
     ViewData["Title"] = "Dashboard";
     var ordersPerMonth = ViewBag.OrdersPerMonth as IEnumerable<dynamic>;
     var customersPerMonth = ViewBag.CustomersPerMonth as IEnumerable<dynamic>;
@@ -10,7 +12,7 @@
     <h2>Dashboard</h2>
 
     <div>
-        <h3>Totale omzet: @((totalRevenue is decimal d ? d.ToString("C") : "€0,00"))</h3>
+        <p>Totale omzet: @((totalRevenue is decimal d ? d.ToString("C") : "€0,00"))</p>
     </div>
 
     <div style="width: 600px; margin-bottom: 40px;">
@@ -20,7 +22,7 @@
         <canvas id="customersChart"></canvas>
     </div>
 
-    <h3>Producten met lage voorraad</h3>
+    <p>Producten met lage voorraad</p>
     <table class="table">
         <thead>
             <tr>
@@ -44,47 +46,10 @@
 </div>
 
 @section Scripts {
+    <script src="~/js/dashboard.js"></script>
     <script>
-        // Orders per maand
-        var ordersLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<string>>(
-                    ordersPerMonth != null ? ordersPerMonth.Select(x => (string)x.Month) : Array.Empty<string>()
-            ));
-    var ordersData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<int>>(
-                ordersPerMonth != null ? ordersPerMonth.Select(x => (int)x.Count) : Array.Empty<int>()
-        ));
-
-    var ctxOrders = document.getElementById('ordersChart').getContext('2d');
-    new Chart(ctxOrders, {
-        type: 'bar',
-        data: {
-            labels: ordersLabels,
-            datasets: [{
-                label: 'Orders per maand',
-                data: ordersData,
-                backgroundColor: 'rgba(54, 162, 235, 0.5)'
-            }]
-        }
-    });
-
-        // Klanten geregistreerd per maand
-        var customersLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<string>>(
-                customersPerMonth != null ? customersPerMonth.Select(x => (string)x.Month) : Array.Empty<string>()
-        ));
-    var customersData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<int>>(
-                customersPerMonth != null ? customersPerMonth.Select(x => (int)x.Count) : Array.Empty<int>()
-        ));
-
-    var ctxCustomers = document.getElementById('customersChart').getContext('2d');
-    new Chart(ctxCustomers, {
-        type: 'line',
-        data: {
-            labels: customersLabels,
-            datasets: [{
-                label: 'Klanten geregistreerd per maand',
-                data: customersData,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)'
-            }]
-        }
-    });
-</script>
+        const ordersPerMonth = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ordersPerMonth ?? new List<dynamic>()));
+        const customersPerMonth = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(customersPerMonth ?? new List<dynamic>()));
+        renderDashboardCharts(ordersPerMonth, customersPerMonth);
+    </script>
 }

@@ -67,7 +67,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             // Producten met lage voorraad (bijvoorbeeld <= 3)
             var lowStockProducts = await _context.Products
-                .Where(p => p.StockQuantity <= 3)
+                .Where(p => p.StockQuantity <= 10)
                 .Select(p => new { p.Name, p.StockQuantity })
                 .ToListAsync();
 
