@@ -53,7 +53,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         // POST: Orders/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId,Status")] Order order, int[] selectedProductIds)
+        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId,Status,PaidAt,ShippedAt,DeliveredAt")] Order order, int[] selectedProductIds)
         {
             Debug.WriteLine($"ModelState valid: {ModelState.IsValid}");
 
@@ -107,7 +107,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         // POST: Orders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId,Status")] Order order, int[] selectedProductIds)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId,Status,PaidAt,ShippedAt,DeliveredAt")] Order order, int[] selectedProductIds)
         {
             if (id != order.Id) return NotFound();
 

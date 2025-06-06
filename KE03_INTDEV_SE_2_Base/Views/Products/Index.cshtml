@@ -4,10 +4,9 @@
 @{  
     ViewData["Title"] = "Producten";  
 }  
-<p class="headerform1">Maak een klant aan</p>
 
 <p>  
-    <a class="voegtoe2" asp-action="Create">Maak product aan</a>
+    <a class="voegtoe" asp-action="Create">Maak product aan</a>
 </p>  
 
 <form asp-controller="Products" asp-action="Index" method="get" class="product-zoekform">
@@ -24,10 +23,10 @@
             </div>
             <div class="filter-item">
                     <label>
-                            Onderdelen:
-                            <select asp-for="ProductPart" asp-items="Model.Parts" class="onderdelen">
-                                <option value="">All</option>
-                            </select>
+                        Onderdelen:
+                        <select asp-for="ProductPart" asp-items="Model.Parts" class="onderdelen">
+                            <option value="">All</option>
+                        </select>
                     </label>
             </div>
             <div class="filter-item">
@@ -39,7 +38,7 @@
             </div>
             <div class="filter-item">
                 <label>
-                    Datum:
+                    Toevoegingsdatum:
                     <input type="date" asp-for="StartDate" class="filter-datum" /> -
                     <input type="date" asp-for="EndDate" class="filter-datum" />
                 </label>
@@ -50,39 +49,48 @@
 
 
 
-<table class="table1">  
+<table class="table">  
     <thead>  
-        <tr>  
+        <tr>
+            <th>
+                ID
+            </th>
             <th>  
-                Image  
+                Afbeelding  
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].Name)  
+                Naam 
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].Description)
+                Beschrijving
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].Price)
+                Prijs standaard
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].SalePrice)
+                Prijs aanbieding
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].SaleStartDate)
+                Startdatum aanbieding
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].SaleEndDate)
+                Einddatum aanbieding
             </th>  
             <th>  
-                @Html.DisplayNameFor(model => model.Products![0].StockQuantity)
+                Voorraad
             </th>  
-            <th></th>  
+            <th>
+                Toevoegingsdatum
+            </th>
+            <th></th>
         </tr>  
     </thead>  
     <tbody>  
 @foreach (var item in Model.Products!) {  
-        <tr>  
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>  
                 <img src="@item.ImageUrl" alt="Product Image" style="width: 50px; height: 50px;" />  
             </td>  
@@ -107,6 +115,9 @@
             <td>  
                 @Html.DisplayFor(modelItem => item.StockQuantity)  
             </td>  
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
             <td>
                     <a class="bewerk" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
                     <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
