@@ -36,13 +36,6 @@
                     <input type="number" asp-for="MaxPrice" placeholder="Max" class="filter-prijs" />
                 </label>
             </div>
-            <div class="filter-item">
-                <label>
-                    Toevoegingsdatum:
-                    <input type="date" asp-for="StartDate" class="filter-datum" />
-                    <input type="date" asp-for="EndDate" class="filter-datum" />
-                </label>
-            </div>
         </div>
     </div>
 </form>
@@ -54,10 +47,7 @@
             <th>Afbeelding</th>  
             <th>Naam</th>   
             <th>Huidige prijs</th>
-            <th>Startdatum aanbieding</th>  
-            <th>Einddatum aanbieding</th>  
-            <th>Voorraad</th>  
-            <th>Toevoegingsdatum</th>
+            <th>Voorraad</th>
             <th></th>
         </tr>  
     </thead>  
@@ -80,25 +70,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="@(isOnSale ? "sale-price" : "")">
                     @currentPrice.ToString("C")
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SaleStartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SaleEndDate)
-                </td>
-                <td>
+                <td class="@(item.StockQuantity <= 5 ? "low-stock" : "")">
                     @Html.DisplayFor(modelItem => item.StockQuantity)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    <a class="bewerk" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
-                        <button type="submit" class="verwijder" onclick="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">Verwijder</button>
+                <td class="actie-knoppen">
+                    <a class="actie-knop bewerk" asp-action="Edit" asp-route-id="@item.Id">Bewerk</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                        <button type="submit" class="actie-knop verwijder" onclick="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">Verwijder</button>
                     </form>
                 </td>
             </tr>

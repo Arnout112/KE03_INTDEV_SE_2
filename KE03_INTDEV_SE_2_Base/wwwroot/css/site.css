@@ -99,19 +99,35 @@ body {
 
 .table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #2c2c2c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
     .table th, .table td {
-        padding: 10px;
+        padding: 16px 20px;
         border-bottom: 1px solid #444;
     }
 
     .table th {
+        background: #3a3a3a;
         text-align: left;
-        font-weight: bold;
+        font-weight: 400;
+        font-size: 24px;
+        padding: 8px 12px;
     }
 
+    .table tbody tr:nth-child(even) {
+        background-color: #333333;
+    }
+
+    .table tbody tr:hover {
+        background-color: #444444;
+        transition: background-color 0.2s;
+    }
 /* Formulieren */
 
 .form-container {
@@ -233,4 +249,60 @@ body {
 .footer {
     margin-top: 40px;
     text-align: center;
+}
+
+.actie-knoppen {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.actie-knop {
+    width: 90px;
+    height: 32px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: 'League Gothic', sans-serif;
+    text-align: center;
+    line-height: 32px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-block;
+    border: 2px solid;
+    padding: 0;
+}
+
+.bewerk {
+    background-color: #1D1D1D;
+    color: white;
+    border-color: white;
+}
+
+    .bewerk:hover {
+        background-color: white;
+        color: #1D1D1D;
+    }
+
+.verwijder {
+    background-color: #BC0D0D;
+    color: white;
+    border-color: #BC0D0D;
+}
+
+    .verwijder:hover {
+        background-color: white;
+        color: #BC0D0D;
+    }
+
+.sale-price {
+    color: #28a745; /* mooi groen */
+    font-weight: bold;
+}
+
+.low-stock {
+    color: #BC0D0D;
+    font-weight: bold;
 }
