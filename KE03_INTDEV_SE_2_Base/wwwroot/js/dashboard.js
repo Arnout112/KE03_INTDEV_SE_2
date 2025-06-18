@@ -8,6 +8,17 @@
                 data: ordersData,
                 backgroundColor: 'rgba(54, 162, 235, 0.5)'
             }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        precision: 0
+                    }
+                }
+            }
         }
     });
 
@@ -20,6 +31,17 @@
                 data: customersData,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)'
             }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        precision: 0
+                    }
+                }
+            }
         }
     });
 });
