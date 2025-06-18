@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1D1D1D">
-    <title>@ViewData["Title"] Matrix Inc.</title>
+    <title>@ViewData["Title"] - Matrix Inc.</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,44 +12,37 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    
 
+    <div class="layout-container">
+
+        <!-- Sidebar -->
         <div class="navbar">
             <p class="logo">Matrix Inc.</p>
-            <a class="navbtn1" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
-            <a class="navbtn2" asp-area="" asp-controller="Orders" asp-action="Index">Bestelling</a>
-            <a class="navbtn3" asp-area="" asp-controller="Customers" asp-action="Index">Klanten</a>
-            <a class="navbtn4" asp-area="" asp-controller="Products" asp-action="Index">Producten</a>
-            <a class="navbtn5" asp-area="" asp-controller="Instellingen" asp-action="Index">Instellingen</a>
-            <a class="navbtn6" asp-area="" asp-controller="Gebruiker" asp-action="Index">Gebruiker</a>
+            <a class="navbtn" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+            <a class="navbtn" asp-area="" asp-controller="Orders" asp-action="Index">Bestelling</a>
+            <a class="navbtn" asp-area="" asp-controller="Customers" asp-action="Index">Klanten</a>
+            <a class="navbtn" asp-area="" asp-controller="Products" asp-action="Index">Producten</a>
+            <a class="navbtn" asp-area="" asp-controller="Instellingen" asp-action="Index">Instellingen</a>
+            <a class="navbtn" asp-area="" asp-controller="Gebruiker" asp-action="Index">Gebruiker</a>
         </div>
 
+        <!-- Content rechts van de navbar -->
+        <div class="content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
 
-
-
-
-    <footer>
-        <div class="copyright">
-            <p>Copyright Matrix Inc.</p>
+            <footer class="footer">
+                <p>Copyright Matrix Inc.</p>
+            </footer>
         </div>
-    </footer>
 
-
-
-
-    @* BELANGRIJK *@
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
     </div>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    @* BELANGRIJK *@
-
 
 </body>
 </html>

@@ -1,12 +1,5 @@
-﻿function renderDashboardCharts(ordersPerMonth, customersPerMonth) {
-    const ordersLabels = ordersPerMonth.map(x => x.Month);
-    const ordersData = ordersPerMonth.map(x => x.Count);
-
-    const customersLabels = customersPerMonth.map(x => x.Month);
-    const customersData = customersPerMonth.map(x => x.Count);
-
-    const ctxOrders = document.getElementById('ordersChart');
-    new Chart(ctxOrders, {
+﻿document.addEventListener("DOMContentLoaded", function () {
+    new Chart(document.getElementById('ordersChart').getContext('2d'), {
         type: 'bar',
         data: {
             labels: ordersLabels,
@@ -15,20 +8,10 @@
                 data: ordersData,
                 backgroundColor: 'rgba(54, 162, 235, 0.5)'
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    ticks: {
-                        stepSize: 2
-                    }
-                }
-            }
         }
     });
 
-    const ctxCustomers = document.getElementById('customersChart');
-    new Chart(ctxCustomers, {
+    new Chart(document.getElementById('customersChart').getContext('2d'), {
         type: 'line',
         data: {
             labels: customersLabels,
@@ -37,15 +20,6 @@
                 data: customersData,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)'
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    ticks: {
-                        stepSize: 2
-                    }
-                }
-            }
         }
     });
-}
+});

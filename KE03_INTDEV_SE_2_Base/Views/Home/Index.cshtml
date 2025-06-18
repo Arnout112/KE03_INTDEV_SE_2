@@ -1,55 +1,61 @@
-﻿@using System.Text.Json
+﻿@model KE03_INTDEV_SE_2_Base.Models.DashboardViewModel
 
 @{
     ViewData["Title"] = "Dashboard";
-    var ordersPerMonth = ViewBag.OrdersPerMonth as IEnumerable<dynamic>;
-    var customersPerMonth = ViewBag.CustomersPerMonth as IEnumerable<dynamic>;
-    var totalRevenue = ViewBag.TotalRevenue;
-    var lowStockProducts = ViewBag.LowStockProducts as IEnumerable<dynamic>;
+
+    var ordersLabelsJson = System.Text.Json.JsonSerializer.Serialize(Model.OrdersPerMonth.Select(x => x.Month));
+    var ordersDataJson = System.Text.Json.JsonSerializer.Serialize(Model.OrdersPerMonth.Select(x => x.Count));
+
+    var customersLabelsJson = System.Text.Json.JsonSerializer.Serialize(Model.CustomersPerMonth.Select(x => x.Month));
+    var customersDataJson = System.Text.Json.JsonSerializer.Serialize(Model.CustomersPerMonth.Select(x => x.Count));
 }
 
-<div class="dashboard">
-    <h2>Dashboard</h2>
-
-    <div>
-        <p>Totale omzet: @((totalRevenue is decimal d ? d.ToString("C") : "€0,00"))</p>
+<div class="dashboard-grid">
+    <div class="card">
+        <h3>Totale omzet</h3>
+        <p class="revenue">@Model.TotalRevenue.ToString("C")</p>
     </div>
 
-    <div style="width: 600px; margin-bottom: 40px;">
+    <div class="card">
+        <h3>Orders per maand</h3>
         <canvas id="ordersChart"></canvas>
     </div>
-    <div style="width: 600px; margin-bottom: 40px;">
+
+    <div class="card">
+        <h3>Klanten geregistreerd per maand</h3>
         <canvas id="customersChart"></canvas>
     </div>
 
-    <p>Producten met lage voorraad</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Voorraad</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (lowStockProducts != null)
-            {
-                foreach (var p in lowStockProducts)
-                {
+    <div class="card">
+        <h3>Producten met lage voorraad</h3>
+        <div class="table-container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@p.Name</td>
-                        <td>@p.StockQuantity</td>
+                        <th>Product</th>
+                        <th>Voorraad</th>
                     </tr>
-                }
-            }
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model.LowStockProducts)
+                    {
+                        <tr>
+                            <td>@p.Name</td>
+                            <td>@p.StockQuantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-    <script src="~/js/dashboard.js"></script>
     <script>
-        const ordersPerMonth = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ordersPerMonth ?? new List<dynamic>()));
-        const customersPerMonth = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(customersPerMonth ?? new List<dynamic>()));
-        renderDashboardCharts(ordersPerMonth, customersPerMonth);
+        const ordersLabels = @Html.Raw(ordersLabelsJson);
+        const ordersData = @Html.Raw(ordersDataJson);
+        const customersLabels = @Html.Raw(customersLabelsJson);
+        const customersData = @Html.Raw(customersDataJson);
     </script>
+    <script src="~/js/dashboard.js"></script>
 }
