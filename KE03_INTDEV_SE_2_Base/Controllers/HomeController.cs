@@ -17,7 +17,9 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var orders = await _context.Orders.ToListAsync();
+            var orders = await _context.Orders
+                .Include(o => o.Products)
+                .ToListAsync();
             var customers = await _context.Customers.ToListAsync();
 
             var ordersPerMonth = orders
