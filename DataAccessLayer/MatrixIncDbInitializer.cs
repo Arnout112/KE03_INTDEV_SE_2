@@ -1007,6 +1007,7 @@ namespace DataAccessLayer
             context.Products.AddRange(products);
             #endregion
 
+            #region Database Creation Parts
             var parts = new Part[]
             {
                 new Part { Name = "Tandwiel", Description = "Overdracht van rotatie in bijvoorbeeld de motor of luikmechanismen"},
@@ -1015,12 +1016,68 @@ namespace DataAccessLayer
                 new Part { Name = "Koelvloeistofpomp", Description = "Koeling van de motor of elektronische systemen."}
             };
             context.Parts.AddRange(parts);
+            #endregion
 
+            #region Product - Parts relationship
             products[0].Parts.Add(parts[0]);
             products[0].Parts.Add(parts[1]);
             products[1].Parts.Add(parts[1]);
             products[1].Parts.Add(parts[2]);
             products[2].Parts.Add(parts[3]);
+            #endregion
+
+            #region Orders - Product relationship
+            orders[0].Products = new List<Product> { products[0], products[1], products[2], products[4], products[30], products[8] };
+            orders[1].Products = new List<Product> { products[2] };
+            orders[2].Products = new List<Product> { products[3], products[4] };
+            orders[3].Products = new List<Product> { products[5] };
+            orders[4].Products = new List<Product> { products[6], products[7], products[8] };
+            orders[5].Products = new List<Product> { products[9] };
+            orders[6].Products = new List<Product> { products[10], products[11] };
+            orders[7].Products = new List<Product> { products[12] };
+            orders[8].Products = new List<Product> { products[13], products[14] };
+            orders[9].Products = new List<Product> { products[15] };
+            orders[10].Products = new List<Product> { products[16], products[17] };
+            orders[11].Products = new List<Product> { products[18] };
+            orders[12].Products = new List<Product> { products[19], products[20] };
+            orders[13].Products = new List<Product> { products[21] };
+            orders[14].Products = new List<Product> { products[22], products[23] };
+            orders[15].Products = new List<Product> { products[24] };
+            orders[16].Products = new List<Product> { products[25], products[26] };
+            orders[17].Products = new List<Product> { products[27] };
+            orders[18].Products = new List<Product> { products[28], products[29] };
+            orders[19].Products = new List<Product> { products[30] };
+            orders[20].Products = new List<Product> { products[31], products[32] };
+            orders[21].Products = new List<Product> { products[33] };
+            orders[22].Products = new List<Product> { products[34], products[35] };
+            orders[23].Products = new List<Product> { products[36] };
+            orders[24].Products = new List<Product> { products[37], products[38] };
+            orders[25].Products = new List<Product> { products[39] };
+            orders[26].Products = new List<Product> { products[40], products[41] };
+            orders[27].Products = new List<Product> { products[42] };
+            orders[28].Products = new List<Product> { products[43], products[44] };
+            orders[29].Products = new List<Product> { products[45] };
+            orders[30].Products = new List<Product> { products[46], products[47] };
+            orders[31].Products = new List<Product> { products[48] };
+            orders[32].Products = new List<Product> { products[49], products[48] };
+            orders[33].Products = new List<Product> { products[1] };
+            orders[34].Products = new List<Product> { products[1], products[2] };
+            orders[35].Products = new List<Product> { products[1] };
+            orders[36].Products = new List<Product> { products[1], products[2] };
+            orders[37].Products = new List<Product> { products[1] };
+            orders[38].Products = new List<Product> { products[48], products[30] };
+            orders[39].Products = new List<Product> { products[0] };
+            orders[40].Products = new List<Product> { products[1], products[2] };
+            orders[41].Products = new List<Product> { products[3] };
+            orders[42].Products = new List<Product> { products[4], products[5] };
+            orders[43].Products = new List<Product> { products[6] };
+            orders[44].Products = new List<Product> { products[7], products[8] };
+            orders[45].Products = new List<Product> { products[9] };
+            orders[46].Products = new List<Product> { products[10], products[11] };
+            orders[47].Products = new List<Product> { products[12] };
+            orders[48].Products = new List<Product> { products[13], products[14] };
+            orders[49].Products = new List<Product> { products[15] };
+            #endregion
 
             context.SaveChanges();
 
