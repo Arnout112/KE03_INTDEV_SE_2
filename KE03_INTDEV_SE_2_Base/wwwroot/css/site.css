@@ -1,4 +1,6 @@
-/* Algemene reset en basis */
+/* ================================================== */
+/* Algemene reset en basis styling */
+/* ================================================== */
 
 * {
     margin: 0;
@@ -13,14 +15,24 @@ body {
     color: white;
 }
 
-/* Layout containers */
+/* ================================================== */
+/* Layout en Containers */
+/* ================================================== */
 
 .layout-container {
     display: flex;
     height: 100vh;
 }
 
-/* Sidebar (navbar) */
+.content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* ================================================== */
+/* Sidebar (Navbar) */
+/* ================================================== */
 
 .navbar {
     width: 300px;
@@ -56,15 +68,9 @@ body {
         color: #1D1D1D;
     }
 
-/* Content rechts naast navbar */
-
-.content {
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto;
-}
-
-/* Dashboard grid */
+/* ================================================== */
+/* Dashboard Cards */
+/* ================================================== */
 
 .dashboard-grid {
     display: grid;
@@ -91,6 +97,10 @@ body {
     font-size: 2.5rem;
     font-weight: bold;
 }
+
+/* ================================================== */
+/* Tabellen */
+/* ================================================== */
 
 .table-container {
     flex: 1;
@@ -128,7 +138,120 @@ body {
         background-color: #444444;
         transition: background-color 0.2s;
     }
+
+/* Dynamische kleuren in tabel */
+
+.sale-price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.low-stock {
+    color: #BC0D0D;
+    font-weight: bold;
+}
+
+/* Badges voor actief / inactief */
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'League Gothic', sans-serif;
+    text-align: center;
+}
+
+.actief {
+    background-color: #27870D;
+    color: white;
+}
+
+.inactief {
+    background-color: #BC0D0D;
+    color: white;
+}
+
+/* ================================================== */
+/* Actieknoppen in tabellen */
+/* ================================================== */
+
+.actie-knoppen {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.actie-knop {
+    width: 90px;
+    height: 32px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: 'League Gothic', sans-serif;
+    text-align: center;
+    line-height: 32px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-block;
+    border: 2px solid;
+    padding: 0;
+}
+
+.bewerk {
+    background-color: #1D1D1D;
+    color: white;
+    border-color: white;
+}
+
+    .bewerk:hover {
+        background-color: white;
+        color: #1D1D1D;
+    }
+
+.verwijder {
+    background-color: #BC0D0D;
+    color: white;
+    border-color: #BC0D0D;
+}
+
+    .verwijder:hover {
+        background-color: white;
+        color: #BC0D0D;
+    }
+
+    .knop-boven {
+    margin-bottom: 20px; /* of kleiner als je hem strakker wilt */
+}
+
+.toevoegen {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    border-radius: 20px;
+    background: #27870D;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .toevoegen:hover {
+        background: white;
+        color: #27870D;
+        border: 2px solid #27870D;
+    }
+
+/* ================================================== */
 /* Formulieren */
+/* ================================================== */
 
 .form-container {
     max-width: 800px;
@@ -201,7 +324,57 @@ body {
         border: 2px solid #BC0D0D;
     }
 
+/* Switch component (Active toggle) */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 12px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #BC0D0D;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+input:checked + .slider {
+    background-color: #27870D;
+}
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+/* ================================================== */
 /* Zoeken */
+/* ================================================== */
 
 .zoekform-container {
     display: flex;
@@ -211,7 +384,9 @@ body {
 
 .zoekbalk-wrapper {
     display: flex;
-    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 .zoekbalk {
@@ -221,20 +396,20 @@ body {
     border: 1px solid white;
     padding: 0 16px;
     font-family: 'League Gothic', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     background: white;
     color: #1D1D1D;
 }
 
 .zoekknop {
     height: 40px;
+    padding: 0 20px;
     border-radius: 20px;
     border: 1px solid #27870D;
     background: #27870D;
     color: white;
     font-family: 'League Gothic', sans-serif;
-    font-size: 22px;
-    padding: 0 28px;
+    font-size: 20px;
     cursor: pointer;
     transition: 0.2s;
 }
@@ -244,65 +419,44 @@ body {
         color: #27870D;
     }
 
+.zoekform-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.zoekform-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.zoekgroep {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.filterkolom {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* ================================================== */
 /* Footer */
+/* ================================================== */
 
 .footer {
     margin-top: 40px;
     text-align: center;
-}
-
-.actie-knoppen {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-}
-
-.actie-knop {
-    width: 90px;
-    height: 32px;
-    border-radius: 15px;
-    font-size: 16px;
-    font-family: 'League Gothic', sans-serif;
-    text-align: center;
-    line-height: 32px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.2s;
-    display: inline-block;
-    border: 2px solid;
-    padding: 0;
-}
-
-.bewerk {
-    background-color: #1D1D1D;
-    color: white;
-    border-color: white;
-}
-
-    .bewerk:hover {
-        background-color: white;
-        color: #1D1D1D;
-    }
-
-.verwijder {
-    background-color: #BC0D0D;
-    color: white;
-    border-color: #BC0D0D;
-}
-
-    .verwijder:hover {
-        background-color: white;
-        color: #BC0D0D;
-    }
-
-.sale-price {
-    color: #28a745; /* mooi groen */
-    font-weight: bold;
-}
-
-.low-stock {
-    color: #BC0D0D;
-    font-weight: bold;
 }
