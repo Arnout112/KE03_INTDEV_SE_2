@@ -5,29 +5,26 @@
     ViewData["Title"] = "Producten";  
 }  
 
-<p>  
-    <a class="voegtoe" asp-action="Create">Maak product aan</a>
-</p>  
-
 <form asp-controller="Products" asp-action="Index" method="get" class="product-zoekform">
-    <div class="zoekform-container">
-        <div class="zoekbalk-kolom">
-            <div class="zoekbalk-wrapper">
-                <input type="text" asp-for="SearchString" class="zoekbalk" placeholder="Zoek op naam..." />
-                <input type="submit" value="Zoek" class="navbtn7" />
-            </div>
+    <div class="zoekform-header">
+        <a class="toevoegen" asp-action="Create">Maak product aan</a>
+
+        <div class="zoekgroep">
+            <input type="text" asp-for="SearchString" class="zoekbalk" placeholder="Zoek op naam..." />
+            <input type="submit" value="Zoek" class="navbtn7" />
         </div>
+
         <div class="filterkolom">
             <div class="filter-item">
                 <label><input type="checkbox" asp-for="IsOnSale" value="true" /> In de aanbieding</label>
             </div>
             <div class="filter-item">
-                    <label>
-                        Onderdelen:
-                        <select asp-for="ProductPart" asp-items="Model.Parts" class="onderdelen">
-                            <option value="">All</option>
-                        </select>
-                    </label>
+                <label>
+                    Onderdelen:
+                    <select asp-for="ProductPart" asp-items="Model.Parts" class="onderdelen">
+                        <option value="">All</option>
+                    </select>
+                </label>
             </div>
             <div class="filter-item">
                 <label>

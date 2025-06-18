@@ -1,12 +1,26 @@
-﻿@model IEnumerable<DataAccessLayer.Models.Order>
+﻿@model KE03_INTDEV_SE_2_Base.Models.OrderFilterViewModel
 
 @{
     ViewData["Title"] = "Orders";
 }
 
-<p>
-    <a asp-action="Create" class="voegtoe">Maak bestelling aan</a>
-</p>
+<form asp-controller="Orders" asp-action="Index" method="get" class="order-zoekform">
+    <div class="zoekform-header">
+        <a asp-action="Create" class="toevoegen">Maak bestelling aan</a>
+
+        <div class="zoekgroep">
+            <input asp-for="SearchString" class="zoekbalk" placeholder="Zoek op klantnaam..." />
+            <input type="submit" value="Zoek" class="navbtn7" />
+        </div>
+
+        <div class="filterkolom">
+            <div class="filter-item">
+                <label>Status:</label>
+                <select asp-for="OrderStatus" asp-items="Model.StatusOptions" class="onderdelen"></select>
+            </div>
+        </div>
+    </div>
+</form>
 
 <table class="table">
     <thead>
@@ -22,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var order in Model)
+        @foreach (var order in Model.Orders)
         {
             <tr>
                 <td>@order.Id</td>
@@ -32,14 +46,13 @@
                 <td>@order.PaidAt?.ToString("dd-MM-yyyy")</td>
                 <td>@order.ShippedAt?.ToString("dd-MM-yyyy")</td>
                 <td>@order.DeliveredAt?.ToString("dd-MM-yyyy")</td>
-                <td>
-                    <a class="bewerk" asp-action="Edit" asp-route-id="@order.Id">Bewerk</a>
-                    <form asp-action="Delete" asp-route-id="@order.Id" method="post" style="display:inline;">
-                        <button type="submit" class="verwijder" onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?');">Verwijder</button>
+                <td class="actie-knoppen">
+                    <a class="actie-knop bewerk" asp-action="Edit" asp-route-id="@order.Id">Bewerk</a>
+                    <form asp-action="Delete" asp-route-id="@order.Id" method="post">
+                        <button type="submit" class="actie-knop verwijder" onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?');">Verwijder</button>
                     </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
