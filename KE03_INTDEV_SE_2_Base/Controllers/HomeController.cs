@@ -1,4 +1,6 @@
 using DataAccessLayer;
+using DataAccessLayer.Models;
+using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,68 +17,49 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Orders per maand
-            var ordersPerMonth = await _context.Orders
+            var orders = await _context.Orders
+                .Include(o => o.Products)
+                .ToListAsync();
+            var customers = await _context.Customers.ToListAsync();
+
+            var ordersPerMonth = orders
                 .GroupBy(o => new { o.OrderDate.Year, o.OrderDate.Month })
-                .Select(g => new
+                .Select(g => new MonthCount
                 {
-                    Year = g.Key.Year,
-                    Month = g.Key.Month,
+                    Month = $"{g.Key.Year}-{g.Key.Month:00}",
                     Count = g.Count()
                 })
-                .OrderBy(x => x.Year)
-                .ThenBy(x => x.Month)
-                .ToListAsync();
-
-            var ordersPerMonthFormatted = ordersPerMonth
-                .Select(x => new
-                {
-                    Month = $"{x.Year}-{x.Month:00}",
-                    Count = x.Count
-                })
+                .OrderBy(x => x.Month)
                 .ToList();
 
-            // Klanten geregistreerd per maand
-            var customersPerMonth = await _context.Customers
+            var customersPerMonth = customers
                 .GroupBy(c => new { c.JoinDate.Year, c.JoinDate.Month })
-                .Select(g => new
+                .Select(g => new MonthCount
                 {
-                    Year = g.Key.Year,
-                    Month = g.Key.Month,
+                    Month = $"{g.Key.Year}-{g.Key.Month:00}",
                     Count = g.Count()
                 })
-                .OrderBy(x => x.Year)
-                .ThenBy(x => x.Month)
-                .ToListAsync();
-
-            var customersPerMonthFormatted = customersPerMonth
-                .Select(x => new
-                {
-                    Month = $"{x.Year}-{x.Month:00}",
-                    Count = x.Count
-                })
+                .OrderBy(x => x.Month)
                 .ToList();
 
-            // Totale omzet (totaal van alle order-producten)
-            var allPrices = await _context.Orders
+            var totalRevenue = orders
                 .SelectMany(o => o.Products)
-                .Select(p => p.Price)
-                .ToListAsync();
+                .Sum(p => p.Price);
 
-            var totalRevenue = allPrices.Sum();
-
-            // Producten met lage voorraad (bijvoorbeeld <= 3)
             var lowStockProducts = await _context.Products
-                .Where(p => p.StockQuantity <= 10)
-                .Select(p => new { p.Name, p.StockQuantity })
+                .Where(p => p.StockQuantity < 5)
+                .OrderBy(p => p.StockQuantity)
                 .ToListAsync();
 
-            ViewBag.OrdersPerMonth = ordersPerMonthFormatted;
-            ViewBag.CustomersPerMonth = customersPerMonthFormatted;
-            ViewBag.TotalRevenue = totalRevenue;
-            ViewBag.LowStockProducts = lowStockProducts;
+            var model = new DashboardViewModel
+            {
+                OrdersPerMonth = ordersPerMonth,
+                CustomersPerMonth = customersPerMonth,
+                TotalRevenue = totalRevenue,
+                LowStockProducts = lowStockProducts
+            };
 
-            return View();
+            return View(model);
         }
     }
 }

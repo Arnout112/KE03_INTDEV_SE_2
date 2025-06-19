@@ -1,9 +1,10 @@
-﻿using DataAccessLayer;
+﻿using System.Diagnostics;
+using DataAccessLayer;
 using DataAccessLayer.Models;
+using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
@@ -16,15 +17,54 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             _context = context;
         }
 
-        // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString, string? orderStatus, bool? isPaid)
         {
-            var orders = await _context.Orders
+            var ordersQuery = _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.Products)
-                .ToListAsync();
-            return View(orders);
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                ordersQuery = ordersQuery.Where(o => o.Customer.Name.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(orderStatus) && Enum.TryParse(orderStatus, true, out OrderStatus parsedOrderStatus))
+            {
+                ordersQuery = ordersQuery.Where(o => o.Status == parsedOrderStatus);
+            }
+
+            var orders = await ordersQuery.ToListAsync();
+
+            var statusOptions = Enum.GetValues(typeof(OrderStatus))
+                .Cast<OrderStatus>()
+                .Select(s => new SelectListItem
+                {
+                    Value = s.ToString(),
+                    Text = s.ToString(),
+                    Selected = s.ToString() == orderStatus
+                })
+                .ToList();
+
+            // Voeg "Alle" als eerste optie toe
+            statusOptions.Insert(0, new SelectListItem
+            {
+                Value = "",
+                Text = "Alle",
+                Selected = string.IsNullOrEmpty(orderStatus)
+            });
+
+            var viewModel = new OrderFilterViewModel
+            {
+                SearchString = searchString,
+                OrderStatus = orderStatus,
+                Orders = orders,
+                StatusOptions = statusOptions
+            };
+
+            return View(viewModel);
         }
+
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)

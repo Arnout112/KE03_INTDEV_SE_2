@@ -1,10 +1,6 @@
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-/*    overflow: hidden; */
-}
+/* ================================================== */
+/* Algemene reset en basis styling */
+/* ================================================== */
 
 * {
     margin: 0;
@@ -13,768 +9,454 @@ html, body {
 }
 
 body {
-    margin-bottom: 60px;
+    height: 100vh;
     background: #1D1D1D;
-    height: 100%;
     font-family: 'League Gothic', sans-serif;
+    color: white;
 }
 
+/* ================================================== */
+/* Layout en Containers */
+/* ================================================== */
+
+.layout-container {
+    display: flex;
+    height: 100vh;
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* ================================================== */
+/* Sidebar (Navbar) */
+/* ================================================== */
+
 .navbar {
-    display: inline-flex;
-    padding: 30px 13px 496.28px 14px;
+    width: 300px;
+    background: #1D1D1D;
+    box-shadow: 0 0 20px #000;
+    padding: 30px 20px;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 52.529px;
-    background: linear-gradient(180deg, #1D1D1D 0%, #1D1D1D 100%);
-    box-shadow: 0px 4px 100px 0px #000;
-    backdrop-filter: blur(25px);
-    height: 100%;
-    width: 300px;
+    gap: 40px;
 }
 
 .logo {
-    color: #FFF;
+    font-size: 64px;
     text-align: center;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
 }
 
-.navbtn1 {
+.navbtn {
     width: 200px;
     height: 50px;
-    flex-shrink: 0;
+    border: 1px solid white;
     border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
+    color: white;
+    font-size: 32px;
     text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    transition: 0.2s;
 }
 
-.navbtn2 {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.navbtn3 {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.navbtn4 {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.navbtn5 {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.navbtn6 {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.navbtn7 {
-    width: 150px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #000;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-    position: relative;
-}
-
-    .navbtn1:hover,
-    .navbtn2:hover,
-    .navbtn3:hover,
-    .navbtn4:hover,
-    .navbtn5:hover,
-    .navbtn6:hover,
-    .voegtoe:hover,
-    .bewerk:hover,
-    .voegtoe2:hover{
-        background-color: #FFF;
+    .navbtn:hover {
+        background: white;
         color: #1D1D1D;
-        border: 1px solid #1D1D1D;
-        text-decoration: none;
-        transition: background 0.2s, color 0.2s, border 0.2s;
     }
 
-.dashboard {
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    position: absolute;
-    top: 30px;
-    left: 750px;
+/* ================================================== */
+/* Dashboard Cards */
+/* ================================================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: stretch;
 }
 
-.copyright {
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    width: 222px;
-    height: 48px;
-    flex-shrink: 0;
-    position: absolute;
-    bottom: 5px;
-    left: 800px;
+.card {
+    background: #2c2c2c;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .card h3 {
+        margin-bottom: 20px;
+    }
+
+.revenue {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* ================================================== */
+/* Tabellen */
+/* ================================================== */
+
+.table-container {
+    flex: 1;
+    overflow-y: auto;
 }
 
 .table {
-    position: absolute;
-    top: 200px;
-    left: 420px;
-    width: 1000px;
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    background: #232323;
-    color: #FFF;
-    font-family: "League Gothic", Arial, sans-serif;
-    font-size: 28px;
-    border-radius: 20px;
+    background: #2c2c2c;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 40px 0 #000;
-}
-
-.table1 {
-    position: absolute;
-    top: 190px;
-    left: 310px;
-    width: 1200px;
-    height: 500px;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: #232323;
-    color: #FFF;
-    font-family: "League Gothic", Arial, sans-serif;
-    font-size: 24px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 40px 0 #000;
-    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
     .table th, .table td {
-        padding: 18px 24px;
-        text-align: left;
+        padding: 16px 20px;
         border-bottom: 1px solid #444;
     }
 
     .table th {
-        background: #1D1D1D;
-        color: #FFF;
-        font-size: 32px;
+        background: #3a3a3a;
+        text-align: left;
         font-weight: 400;
-        letter-spacing: 1px;
+        font-size: 24px;
+        padding: 8px 12px;
     }
 
-    .table tr:last-child td {
-        border-bottom: none;
+    .table tbody tr:nth-child(even) {
+        background-color: #333333;
     }
 
-.table tr:hover td,
-.table1 tr:hover td {
-    background: #333;
-    color: #FFF;
-    transition: background 0.2s, color 0.2s;
+    .table tbody tr:hover {
+        background-color: #444444;
+        transition: background-color 0.2s;
+    }
+
+/* Dynamische kleuren in tabel */
+
+.sale-price {
+    color: #28a745;
+    font-weight: bold;
 }
 
-    .table thead {
-        border-radius: 20px 20px 0 0;
-    }
+.low-stock {
+    color: #BC0D0D;
+    font-weight: bold;
+}
 
-    .table tbody tr:last-child td:first-child {
-        border-radius: 0 0 0 20px;
-    }
+/* Badges voor actief / inactief */
 
-    .table tbody tr:last-child td:last-child {
-        border-radius: 0 0 20px 0;
-    }
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'League Gothic', sans-serif;
+    text-align: center;
+}
+
+.actief {
+    background-color: #27870D;
+    color: white;
+}
+
+.inactief {
+    background-color: #BC0D0D;
+    color: white;
+}
+
+/* ================================================== */
+/* Actieknoppen in tabellen */
+/* ================================================== */
+
+.actie-knoppen {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.actie-knop {
+    width: 90px;
+    height: 32px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: 'League Gothic', sans-serif;
+    text-align: center;
+    line-height: 32px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-block;
+    border: 2px solid;
+    padding: 0;
+}
 
 .bewerk {
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    width: 75px;
-    height: 30px;
-    flex-shrink: 0;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    background-color: #1D1D1D;
+    color: white;
+    border-color: white;
 }
+
+    .bewerk:hover {
+        background-color: white;
+        color: #1D1D1D;
+    }
 
 .verwijder {
-    width: 75px;
-    height: 30px;
-    flex-shrink: 0;
+    background-color: #BC0D0D;
+    color: white;
+    border-color: #BC0D0D;
+}
+
+    .verwijder:hover {
+        background-color: white;
+        color: #BC0D0D;
+    }
+
+    .knop-boven {
+    margin-bottom: 20px; /* of kleiner als je hem strakker wilt */
+}
+
+.toevoegen {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
     border-radius: 20px;
-    border: 1px solid #FFF;
-    background: #BC0D0D;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
+    background: #27870D;
+    color: white;
     font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
     cursor: pointer;
-}
-
-.voegtoe {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
+    border: none;
+    transition: 0.2s;
     text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
     text-decoration: none;
-    cursor: pointer;
-    position: absolute;
-    top: 140px;
-    left: 420px;
+    display: inline-block;
 }
 
-.voegtoe2 {
-    width: 200px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-    cursor: pointer;
-    position: absolute;
-    top: 140px;
-    left: 320px;
-}
+    .toevoegen:hover {
+        background: white;
+        color: #27870D;
+        border: 2px solid #27870D;
+    }
 
-.form {
-    width: 750px;
-    height: 550px;
-    flex-shrink: 0;
-    border-radius: 50px;
+/* ================================================== */
+/* Formulieren */
+/* ================================================== */
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
     background: #1D1D1D;
-    box-shadow: 0px 10px 50px 0px #000;
-    backdrop-filter: blur(25px);
-    position: absolute;
-    left: 540px;
-    top: 100px;
-}
-
-.headerform {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: absolute;
-    left: 250px;
-    top: 20px;
-}
-
-.headerform1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: absolute;
-    left: 750px;
-    top: 70px;
-}
-
-.naam {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 20px;
-}
-
-.land {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 20px;
-}
-
-.plaats {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 20px;
-}
-
-.straatnaam {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 20px;
-}
-
-.postcode {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 20px;
-}
-
-.huisnummer {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: absolute;
-    bottom: 5px;
-    position: relative;
-    top: 20px;
-}
-
-.naam1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 0px;
-}
-
-.land1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 0px;
-}
-
-.plaats1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 0px;
-}
-
-.straatnaam1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 0px;
-}
-
-.postcode1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 0px;
-}
-
-.huisnummer1 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: absolute;
-    bottom: 5px;
-    position: relative;
-    top: 0px;
-}
-.straatnaam2 {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    position: relative;
-    top: 0px;
-}
-
-land2 {
-    width: 300px;
-    height: 40px;
-    flex-shrink: 0;
     border-radius: 20px;
-    background: #FFF;
-    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
-}
-
-.input-container {
+    box-shadow: 0 0 20px #000;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-left: 50px; /* verder naar links */
-    gap: 20px; /* mooie marge tussen de velden */
+    gap: 20px;
 }
 
-.input-container2 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 50px; /* verder naar links */
-    gap: 1px; /* mooie marge tussen de velden */
-}
+    .form-container label {
+        font-size: 24px;
+    }
 
-
-.input {
-    width: 300px;
+.input, select {
+    width: 100%;
     height: 40px;
     border-radius: 20px;
-    background: #FFF;
-    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
     border: none;
     padding: 0 16px;
     font-size: 20px;
-    font-family: "League Gothic";
-}
-
-.input-row {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-top: 80px;
-}
-
-.input-col {
-    display: flex;
-    flex-direction: column;
-    gap: 35px; /* gelijke verticale ruimte tussen alle velden */
-}
-
-.input, select.input {
-    width: 300px;
-    height: 40px;
-    border-radius: 20px;
-    background: #FFF;
-    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
-    border: none;
-    padding: 0 16px;
-    font-size: 20px;
-    font-family: "League Gothic";
+    font-family: 'League Gothic', sans-serif;
+    background: white;
     color: #1D1D1D;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    box-shadow: 0 4px 10px rgba(255,255,255,0.25);
 }
-
 
 .button-row {
     display: flex;
-    flex-direction: row;
-    gap: 32px; /* gewenste ruimte tussen de knoppen */
-    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .aanmaken {
-    width: 100px;
+    width: 120px;
     height: 50px;
-    flex-shrink: 0;
     border-radius: 20px;
     background: #27870D;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    color: white;
+    font-size: 28px;
     cursor: pointer;
+    border: none;
+    transition: 0.2s;
 }
 
-.annuleer {
-    width: 100px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 2px solid #BC0D0D;
-    color: #FFF;
-    text-align: center;
-    font-family: "League Gothic";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-    .annuleer:hover,
-    .verwijder:hover{
-        background: #FFF;
-        color: #BC0D0D;
-        border: 2px solid #FFF;
-        transition: background 0.2s, color 0.2s, border 0.2s;
-        text-decoration: none;
+    .aanmaken:hover {
+        background: white;
+        color: #27870D;
+        border: 2px solid #27870D;
     }
 
-.aanmaken:hover {
-    background: #FFF;
-    color: #27870D;
-    border: 2px solid #27870D;
-    transition: background 0.2s, color 0.2s, border 0.2s;
-    text-decoration: none;
+.annuleer {
+    width: 120px;
+    height: 50px;
+    border-radius: 20px;
+    border: 2px solid #BC0D0D;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.product-zoekform {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-    margin-top: 30px;
+    .annuleer:hover {
+        background: white;
+        color: #BC0D0D;
+        border: 2px solid #BC0D0D;
+    }
+
+/* Switch component (Active toggle) */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 12px;
 }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #BC0D0D;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+input:checked + .slider {
+    background-color: #27870D;
+}
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+/* ================================================== */
+/* Zoeken */
+/* ================================================== */
 
 .zoekform-container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100vw;
-    max-width: 1800px;
-    margin: 0 auto;
-    position: relative;
-    justify-content: flex-start;
-}
-
-.filterkolom {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    min-width: 220px;
-    align-items: flex-start;
-    margin-left: 80px;
-}
-
-.filter-item label {
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 20px;
-}
-
-.filter-prijs,
-.filter-datum {
-    width: 80px;
-    border-radius: 10px;
-    border: 1px solid #FFF;
-    padding: 4px 8px;
-    font-family: "League Gothic";
-    font-size: 18px;
-    margin-left: 4px;
-    margin-right: 4px;
-}
-
-.onderdelen {
-    width: 150px;
-    height: 30px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    background: #FFF;
-    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
-}
-
-.zoekbalk-kolom {
-    flex: 0 1 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
+    margin-bottom: 40px;
 }
 
 .zoekbalk-wrapper {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    width: 100%;
+    gap: 20px;
 }
 
 .zoekbalk {
     width: 320px;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #FFF;
+    border: 1px solid white;
     padding: 0 16px;
-    font-family: "League Gothic";
-    font-size: 22px;
-    background: #FFF;
+    font-family: 'League Gothic', sans-serif;
+    font-size: 20px;
+    background: white;
     color: #1D1D1D;
 }
 
 .zoekknop {
     height: 40px;
+    padding: 0 20px;
     border-radius: 20px;
     border: 1px solid #27870D;
     background: #27870D;
-    color: #FFF;
-    font-family: "League Gothic";
-    font-size: 22px;
-    padding: 0 28px;
+    color: white;
+    font-family: 'League Gothic', sans-serif;
+    font-size: 20px;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, border 0.2s;
+    transition: 0.2s;
 }
+
     .zoekknop:hover {
-        background: #FFF;
+        background: white;
         color: #27870D;
-        border: 1px solid #27870D;
     }
 
-.product-zoekform {
-    position: absolute;
-    top: 30px;
-    left: 700px;
-    width: 100vw;
+.zoekform-container {
     display: flex;
-    justify-content: center;
-    z-index: 10;
-    margin-top: 0;
+    flex-direction: column;
     margin-bottom: 40px;
 }
 
+.zoekform-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.zoekgroep {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.filterkolom {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 
+/* ================================================== */
+/* Footer */
+/* ================================================== */
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+}

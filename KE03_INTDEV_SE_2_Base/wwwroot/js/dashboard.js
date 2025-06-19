@@ -1,12 +1,5 @@
-﻿function renderDashboardCharts(ordersPerMonth, customersPerMonth) {
-    const ordersLabels = ordersPerMonth.map(x => x.Month);
-    const ordersData = ordersPerMonth.map(x => x.Count);
-
-    const customersLabels = customersPerMonth.map(x => x.Month);
-    const customersData = customersPerMonth.map(x => x.Count);
-
-    const ctxOrders = document.getElementById('ordersChart');
-    new Chart(ctxOrders, {
+﻿document.addEventListener("DOMContentLoaded", function () {
+    new Chart(document.getElementById('ordersChart').getContext('2d'), {
         type: 'bar',
         data: {
             labels: ordersLabels,
@@ -19,16 +12,17 @@
         options: {
             scales: {
                 y: {
+                    beginAtZero: true,
                     ticks: {
-                        stepSize: 2
+                        stepSize: 1,
+                        precision: 0
                     }
                 }
             }
         }
     });
 
-    const ctxCustomers = document.getElementById('customersChart');
-    new Chart(ctxCustomers, {
+    new Chart(document.getElementById('customersChart').getContext('2d'), {
         type: 'line',
         data: {
             labels: customersLabels,
@@ -41,11 +35,13 @@
         options: {
             scales: {
                 y: {
+                    beginAtZero: true,
                     ticks: {
-                        stepSize: 2
+                        stepSize: 1,
+                        precision: 0
                     }
                 }
             }
         }
     });
-}
+});

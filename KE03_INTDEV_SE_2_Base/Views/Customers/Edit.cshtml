@@ -42,6 +42,14 @@
                     <input asp-for="HouseNumber" class="input" id="HouseNumber" placeholder="19/19A" />
                     <span asp-validation-for="HouseNumber" class="text-danger"></span>
                 </div>
+                <div class="input-container">
+                    <label for="Active">Actief:</label>
+                    <label class="switch">
+                        <input asp-for="Active" type="checkbox" id="Active" />
+                        <span class="slider"></span>
+                    </label>
+                    <span asp-validation-for="Active" class="text-danger"></span>
+                </div>
             </div>
         </div>
         <div class="form-group button-row" style="margin-top: 10px; margin-left: 260px;">
