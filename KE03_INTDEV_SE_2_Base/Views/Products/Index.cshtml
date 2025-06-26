@@ -8,6 +8,7 @@
 <form asp-controller="Products" asp-action="Index" method="get" class="product-zoekform">
     <div class="zoekform-header">
         <a class="toevoegen" asp-action="Create">Maak product aan</a>
+        <a asp-action="Download" class="toevoegen" style="margin-left: 5px;">Download producten</a>
 
         <div class="zoekgroep">
             <input type="text" asp-for="SearchString" class="zoekbalk" placeholder="Zoek op naam..." />

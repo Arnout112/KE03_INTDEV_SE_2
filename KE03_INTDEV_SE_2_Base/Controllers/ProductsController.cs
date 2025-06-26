@@ -1,4 +1,6 @@
-﻿using DataAccessLayer;
+﻿using System.Net;
+using System.Text;
+using DataAccessLayer;
 using DataAccessLayer.Models;
 using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Http;
@@ -210,5 +212,31 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
+
+
+        //Download file
+        [HttpGet]
+        public async Task<IActionResult> Download()
+        {
+            var products = await _context.Products.ToListAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("ID,Naam,Omschrijving,Prijs,Aanbiedingsprijs,Voorraad,Aangemaakt op");
+
+            foreach (var p in products)
+            {
+                sb.AppendLine($"{p.Id}," +
+                    $"\"{p.Name}\"," +
+                    $"\"{p.Description}\"," +
+                    $"{p.Price}," +
+                    $"{(p.SalePrice.HasValue ? p.SalePrice.Value.ToString() : "")}," +
+                    $"{p.StockQuantity}," +
+                    $"{p.CreatedAt:dd-MM-yyyy}");
+            }
+
+            var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+            return File(bytes, "text/csv", "producten.csv");
+        }
+
     }
 }

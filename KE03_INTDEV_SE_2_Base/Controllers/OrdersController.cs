@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using DataAccessLayer;
 using DataAccessLayer.Models;
 using KE03_INTDEV_SE_2_Base.Models;
@@ -215,5 +216,33 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        //Download file
+        [HttpGet]
+        public async Task<IActionResult> Download()
+        {
+            var orders = await _context.Orders
+                .Include(o => o.Customer)
+                .ToListAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("ID,Besteldatum,Status,Klant,Betaald,Verzonden,Aangekomen");
+
+            foreach (var order in orders)
+            {
+                sb.AppendLine($"{order.Id}," +
+                    $"{order.OrderDate:dd-MM-yyyy}," +
+                    $"{order.Status}," +
+                    $"\"{order.Customer?.Name}\"," +
+                    $"{order.PaidAt?.ToString("dd-MM-yyyy")}," +
+                    $"{order.ShippedAt?.ToString("dd-MM-yyyy")}," +
+                    $"{order.DeliveredAt?.ToString("dd-MM-yyyy")}");
+            }
+
+            var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+            return File(bytes, "text/csv", "orders.csv");
+        }
     }
+
+
 }

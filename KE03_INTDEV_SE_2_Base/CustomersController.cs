@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer;
 using DataAccessLayer.Models;
+using System.Text;
+using System.Net;
 
 namespace KE03_INTDEV_SE_2_Base
 {
@@ -153,5 +155,32 @@ namespace KE03_INTDEV_SE_2_Base
         {
             return _context.Customers.Any(e => e.Id == id);
         }
+
+        //Download file
+        [HttpGet]
+        public async Task<IActionResult> Download()
+        {
+            var customers = await _context.Customers.ToListAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("ID,Naam,Straat,Huisnummer,Postcode,Plaats,Land,Actief,Inschrijfdatum");
+
+            foreach (var c in customers)
+            {
+                sb.AppendLine($"{c.Id}," +
+                    $"\"{c.Name}\"," +
+                    $"\"{c.StreetName}\"," +
+                    $"\"{c.HouseNumber}\"," +
+                    $"\"{c.PostalCode}\"," +
+                    $"\"{c.CityName}\"," +
+                    $"\"{c.Country}\"," +
+                    $"{(c.Active ? "Ja" : "Nee")}," +
+                    $"{c.JoinDate:dd-MM-yyyy}");
+            }
+
+            var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+            return File(bytes, "text/csv", "klanten.csv");
+        }
+
     }
 }
