@@ -4,7 +4,7 @@
     ViewData["Title"] = "Klant aanmaken";
 }
 
-<div class="form">
+<div class="form-container">
     <p class="headerform">Maak een klant aan</p>
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group button-row" style="margin-top: 10px; margin-left: 260px;">
+        <div class="form-group button-row" style="margin-top: 20px; margin-left: 60px;">
             <a class="annuleer" asp-action="Index">Annuleer</a>
             <input type="submit" value="Toevoegen" class="aanmaken" />
         </div>

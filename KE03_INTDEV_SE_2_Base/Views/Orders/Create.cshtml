@@ -4,7 +4,7 @@
     ViewData["Title"] = "Maak order";
 }
 
-<div class="form">
+<div class="form-container">
     <p class="headerform">Maak een order aan</p>
     <form asp-action="Create" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -25,12 +25,12 @@
                     <select asp-for="Status" asp-items="ViewBag.Status" class="input" id="Status"></select>
                     <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="input-col">
                 <div class="input-container2">
                     <label class="straatnaam1" for="selectedProductIds">Producten:</label>
                     <select name="selectedProductIds" asp-items="ViewBag.Products" class="input" id="selectedProductIds" multiple size="5"></select>
                 </div>
+            </div>
+            <div class="input-col">
                 <div class="input-container2">
                     <label class="postcode1" for="PaidAt">Betaald op:</label>
                     <input asp-for="PaidAt" class="input" id="PaidAt" type="date" placeholder="Betaaldatum" />
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group button-row" style="margin-top: 10px; margin-left: 260px;">
+        <div class="form-group button-row" style="margin-top: 20px; margin-left: 60px;">
             <input type="submit" value="Aanmaken" class="aanmaken" />
             <a asp-action="Index" class="annuleer">Annuleer</a>
         </div>
