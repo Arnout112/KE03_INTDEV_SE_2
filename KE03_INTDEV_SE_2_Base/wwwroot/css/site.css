@@ -1,6 +1,3 @@
-/* ================================================== */
-/* Algemene reset en basis styling */
-/* ================================================== */
 
 * {
     margin: 0;
@@ -15,9 +12,6 @@ body {
     color: white;
 }
 
-/* ================================================== */
-/* Layout en Containers */
-/* ================================================== */
 
 .layout-container {
     display: flex;
@@ -29,10 +23,6 @@ body {
     padding: 30px;
     overflow-y: auto;
 }
-
-/* ================================================== */
-/* Sidebar (Navbar) */
-/* ================================================== */
 
 .navbar {
     width: 300px;
@@ -68,9 +58,6 @@ body {
         color: #1D1D1D;
     }
 
-/* ================================================== */
-/* Dashboard Cards */
-/* ================================================== */
 
 .dashboard-grid {
     display: grid;
@@ -98,9 +85,7 @@ body {
     font-weight: bold;
 }
 
-/* ================================================== */
-/* Tabellen */
-/* ================================================== */
+
 
 .table-container {
     flex: 1;
@@ -139,7 +124,7 @@ body {
         transition: background-color 0.2s;
     }
 
-/* Dynamische kleuren in tabel */
+
 
 .sale-price {
     color: #28a745;
@@ -151,7 +136,6 @@ body {
     font-weight: bold;
 }
 
-/* Badges voor actief / inactief */
 
 .badge {
     display: inline-block;
@@ -173,9 +157,7 @@ body {
     color: white;
 }
 
-/* ================================================== */
-/* Actieknoppen in tabellen */
-/* ================================================== */
+
 
 .actie-knoppen {
     display: flex;
@@ -223,8 +205,8 @@ body {
         color: #BC0D0D;
     }
 
-    .knop-boven {
-    margin-bottom: 20px; /* of kleiner als je hem strakker wilt */
+.knop-boven {
+    margin-bottom: 20px; 
 }
 
 .toevoegen {
@@ -232,29 +214,28 @@ body {
     line-height: 40px;
     padding: 0 20px;
     border-radius: 20px;
-    background: #27870D;
+    border: 1px solid;
+    border-color: white;
+    background-color: transparent;
     color: white;
     font-size: 20px;
     cursor: pointer;
-    border: none;
     transition: 0.2s;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    font-family: 'League Gothic', sans-serif;
 }
 
     .toevoegen:hover {
         background: white;
-        color: #27870D;
-        border: 2px solid #27870D;
+        color: black;
     }
 
-/* ================================================== */
-/* Formulieren */
-/* ================================================== */
+
 
 .form-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     background: #1D1D1D;
     border-radius: 20px;
@@ -268,6 +249,43 @@ body {
     .form-container label {
         font-size: 24px;
     }
+
+.input-row {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.input-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-container,
+.input-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-left: 0;
+}
+
+@media (max-width: 900px) {
+    .form-container {
+        padding: 20px;
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .input-col {
+        width: 100%;
+    }
+}
 
 .input, select {
     width: 100%;
@@ -289,12 +307,22 @@ body {
     margin-top: 20px;
 }
 
+.form-text {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+
 .aanmaken {
     width: 120px;
     height: 50px;
     border-radius: 20px;
     background: #27870D;
     color: white;
+    font-family: "League Gothic";
     font-size: 28px;
     cursor: pointer;
     border: none;
@@ -316,6 +344,8 @@ body {
     font-size: 28px;
     cursor: pointer;
     transition: 0.2s;
+    text-align: center;
+    text-decoration: none;
 }
 
     .annuleer:hover {
@@ -405,8 +435,8 @@ input:checked + .slider {
     height: 40px;
     padding: 0 20px;
     border-radius: 20px;
-    border: 1px solid #27870D;
-    background: #27870D;
+    border-color: white;
+    background-color: transparent;
     color: white;
     font-family: 'League Gothic', sans-serif;
     font-size: 20px;
@@ -416,7 +446,7 @@ input:checked + .slider {
 
     .zoekknop:hover {
         background: white;
-        color: #27870D;
+        color: black;
     }
 
 .zoekform-container {
@@ -451,12 +481,37 @@ input:checked + .slider {
     gap: 15px;
 }
 
-
-/* ================================================== */
-/* Footer */
-/* ================================================== */
-
 .footer {
     margin-top: 40px;
+    text-align: center;
+}
+
+.naam1, .land1, .plaats1, .straatnaam1, .postcode1, .huisnummer1, .straatnaam2 {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    position: relative;
+    top: 0px;
+}
+
+land2 {
+    width: 300px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.25);
+}
+
+.headerform {
+    color: #FFF;
+    font-family: "League Gothic";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
     text-align: center;
 }
