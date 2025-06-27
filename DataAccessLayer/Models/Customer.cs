@@ -34,7 +34,7 @@ namespace DataAccessLayer.Models
         [Required]
         public DateTime JoinDate { get; set; } = DateTime.Today;
 
-        public bool Active { get; set; }
+        public bool Active { get; set; } = true;
 
         public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
