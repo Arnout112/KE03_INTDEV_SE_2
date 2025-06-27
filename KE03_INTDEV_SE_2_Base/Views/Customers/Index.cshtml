@@ -1,15 +1,28 @@
-﻿@model IEnumerable<DataAccessLayer.Models.Customer>
+﻿@model KE03_INTDEV_SE_2_Base.Models.CustomerFilterViewModel
 
 @{
     ViewData["Title"] = "Klanten";
 }
 
-<div class="zoekgroep">
-    <a class="toevoegen" asp-action="Create">Maak klant aan</a>
-    <a asp-action="Download" class="toevoegen">Download klanten</a>
-</div>
+<form asp-controller="Customers" asp-action="Index" method="get" class="order-zoekform">
+    <div class="zoekform-header">
+        <div class="zoekgroep">
+            <a asp-action="Create" class="toevoegen">Maak klant aan</a>
+            <a asp-action="Download" class="toevoegen">Download klanten</a>
+            <input asp-for="SearchString" class="zoekbalk" placeholder="Zoek op klantnaam..." />
+            <input type="submit" value="Zoek" class="zoekknop" />
+        </div>
 
-<table class="table klanten-table">
+        <div class="filterkolom">
+            <div class="filter-item">
+                <label>Is actief:</label>
+                <select asp-for="IsCustomerActive" asp-items="Model.ActiveOptions" class="onderdelen"></select>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="table klanten-table" style="margin-top: 20px">
     <thead>
         <tr>
             <th>Naam</th>
@@ -20,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Customers)
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>

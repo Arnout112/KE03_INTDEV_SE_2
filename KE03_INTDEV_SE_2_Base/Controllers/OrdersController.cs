@@ -27,7 +27,9 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                ordersQuery = ordersQuery.Where(o => o.Customer.Name.Contains(searchString));
+                ordersQuery = ordersQuery.Where(o =>
+                    (o.Customer.Name != null && o.Customer.Name.ToUpper().Contains(searchString.ToUpper()))
+                    );
             }
 
             if (!string.IsNullOrEmpty(orderStatus) && Enum.TryParse(orderStatus, true, out OrderStatus parsedOrderStatus))
