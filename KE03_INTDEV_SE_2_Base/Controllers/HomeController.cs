@@ -61,5 +61,9 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             return View(model);
         }
+        public IActionResult Error()
+        {
+            return View();
+        }
     }
 }
