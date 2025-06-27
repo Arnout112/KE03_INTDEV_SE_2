@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataAccessLayer;
+using DataAccessLayer.Models;
+using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DataAccessLayer;
-using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace KE03_INTDEV_SE_2_Base
+namespace KE03_INTDEV_SE_2_Base.Controllers
 {
     public class CustomersController : Controller
     {
@@ -19,11 +20,47 @@ namespace KE03_INTDEV_SE_2_Base
             _context = context;
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString, string? isCustomerActive)
         {
-            return View(await _context.Customers.ToListAsync());
+            var customersQuery = _context.Customers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                customersQuery = customersQuery.Where(c =>
+                    c.Name != null && c.Name.ToUpper().Contains(searchString.ToUpper())
+                );
+            }
+
+            // Filter op actief/inactief als de waarde is opgegeven
+            if (!string.IsNullOrEmpty(isCustomerActive))
+            {
+                if (bool.TryParse(isCustomerActive, out bool isActive))
+                {
+                    customersQuery = customersQuery.Where(c => c.Active == isActive);
+                }
+            }
+
+            var customers = await customersQuery.ToListAsync();
+
+            // Opties voor de dropdown: "Alle", "Actief", "Inactief"
+            var activeOptions = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "", Text = "Alle", Selected = string.IsNullOrEmpty(isCustomerActive) },
+                new SelectListItem { Value = "true", Text = "Actief", Selected = isCustomerActive == "true" },
+                new SelectListItem { Value = "false", Text = "Inactief", Selected = isCustomerActive == "false" }
+            };
+
+            var viewModel = new CustomerFilterViewModel
+            {
+                SearchString = searchString,
+                IsCustomerActive = isCustomerActive,
+                Customers = customers,
+                ActiveOptions = activeOptions
+            };
+
+            return View(viewModel);
         }
+
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
