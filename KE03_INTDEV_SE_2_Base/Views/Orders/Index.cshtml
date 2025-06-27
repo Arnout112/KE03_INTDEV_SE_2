@@ -6,9 +6,9 @@
 
 <form asp-controller="Orders" asp-action="Index" method="get" class="order-zoekform">
     <div class="zoekform-header">
-        <a asp-action="Create" class="toevoegen">Maak bestelling aan</a>
-
         <div class="zoekgroep">
+            <a asp-action="Create" class="toevoegen">Maak bestelling aan</a>
+            <a asp-action="Download" class="toevoegen">Download orders</a>
             <input asp-for="SearchString" class="zoekbalk" placeholder="Zoek op klantnaam..." />
             <input type="submit" value="Zoek" class="zoekknop" />
         </div>
